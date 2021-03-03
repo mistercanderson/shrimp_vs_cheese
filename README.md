@@ -1,2 +1,20 @@
-# tic_tac_toe
-Play tic-tac-toe!
+# Title
+
+### Description
+
+### How it Works
+
+### Technologies Implemented
+- Javascript
+- HTML
+- CSS
+
+### Future Updates
+
+***
+
+#### Contributors:
+- Chris Anderson
+
+### Demo GIFs:
+![](link)
