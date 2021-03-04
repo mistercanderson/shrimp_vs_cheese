@@ -1,14 +1,11 @@
 class Player {
 
-  constructor(id, token, wins) {
+  constructor(token, isTurn, wins, id) {
     this.id = id || Math.floor(Date.now() * Math.random());
     this.token = token;
+    this.isTurn = isTurn || false;
     this.isWinner = false;
     this.wins = wins || [];
-  };
-
-  makeMove(space) {
-    space.push(this.name)
   };
 
   saveWinsToStorage(game) {
@@ -20,5 +17,12 @@ class Player {
   retreiveWinsFromStorage(wins) {
     this.wins.push(wins);
   };
-  
+
+  exchangeTurns() {
+    if (!this.isTurn) {
+      this.isTurn = true;
+    } else {
+      this.isTurn = false;
+    };
+  };
 };
