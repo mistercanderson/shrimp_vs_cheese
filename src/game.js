@@ -28,23 +28,26 @@ class Game {
       };
       return this.checkForWin(player);
     } else {
-      return 'You cant move there';
+      return 0;
     };
   };
 
 // Add drawCheck
   checkForWin(player) {
     if (this.horizontalCheck(player)) {
+      player.wins++;
       this.resetGame();
       return `${player.token} wins!`
     } else if (this.verticalCheck(player)) {
+      player.wins++;
       this.resetGame();
       return `${player.token} wins!`
     } else if (this.diagonalCheck(player)) {
+      player.wins++;
       this.resetGame();
       return `${player.token} wins!`
     } else {
-      return 'No winner yet'
+      return false
     };
   };
 
