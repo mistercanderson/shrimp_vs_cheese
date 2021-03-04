@@ -34,17 +34,18 @@ class Game {
   };
 
   checkForWin(player) {
+    var winningBoard = document.querySelector('.game-board');
     if (this.horizontalCheck(player)) {
       this.isWon = true;
-      player.saveWinsToStorage(this)
+      player.saveWinsToStorage(winningBoard)
       return `${player.token} wins`
     } else if (this.verticalCheck(player)) {
       this.isWon = true;
-      player.saveWinsToStorage(this)
+      player.saveWinsToStorage(winningBoard)
       return `${player.token} wins`
     } else if (this.diagonalCheck(player)) {
       this.isWon = true;
-      player.saveWinsToStorage(this)
+      player.saveWinsToStorage(winningBoard)
       return `${player.token} wins`
     } else if (this.board.every(this.drawCheck)) {
       this.isWon = true;
