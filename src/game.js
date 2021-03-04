@@ -1,8 +1,8 @@
 class Game {
 
   constructor(height, width) {
-    this.height = height;
-    this.width = width;
+    this.boardHeight = height;
+    this.boardWidth = width;
     this.players = [];
     this.board = this.createBoard();
     this.isWon = false;
@@ -11,7 +11,7 @@ class Game {
 
   createBoard() {
     var board = [];
-    var boardArea = this.height * this.width;
+    var boardArea = this.boardHeight * this.boardWidth;
     for (var i = 0; i < boardArea; i++) {
       var space = '';
       board.push(space);
