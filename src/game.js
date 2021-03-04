@@ -6,6 +6,7 @@ class Game {
     this.players = [];
     this.board = this.createBoard();
     this.isWon = false;
+    this.isDraw = false;
   };
 
   createBoard() {
@@ -44,7 +45,7 @@ class Game {
       this.isWon = true;
       return `${player.token} wins`
     } else if (this.board.every(this.drawCheck)) {
-      this.isWon = true;
+      this.isDraw = true;
       return `It's a Draw`
     } else {
       this.isWon = false;

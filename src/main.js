@@ -28,12 +28,14 @@ function playGame() {
     var space = checkCurrentSpace();
     move(player, space);
     changeGameHeader(player);
-    if (game.isWon) {
+    if (game.isWon || game.isDraw) {
       renderBoard();
-      toggleWiggle(player);
+      toggleWiggleAnimation(player);
       winnerAnimation();
       player.saveWinsToStorage(game);
-      setTimeout(function(){clearBoard()}, 2500);
+      setTimeout(function() {
+        clearBoard()
+      }, 2500);
     } else {
       renderBoard();
     };
@@ -44,7 +46,7 @@ function playGame() {
 function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
-    toggleWiggle(player);
+    toggleWiggleAnimation(player);
   };
 };
 
@@ -76,14 +78,14 @@ function checkCurrentSpace() {
   return currentSpace
 };
 
-function toggleWiggle(player) {
+function toggleWiggleAnimation(player) {
   if (player.token === 'shrimp' && !game.isWon) {
     player1Column.classList.remove('current-player');
     player2Column.classList.add('current-player')
   } else if (player.token === 'cheese' && !game.isWon) {
     player1Column.classList.add('current-player');
     player2Column.classList.remove('current-player')
-  } else if (game.isWon) {
+  } else if (game.isWon || game.isDraw) {
     player1Column.classList.remove('current-player');
     player2Column.classList.remove('current-player')
   };
@@ -93,8 +95,12 @@ function winnerAnimation() {
   if (game.isWon) {
     for (var i = 0; i < spaces.length; i++) {
       if (spaces[i].children[0] &&
-          spaces[i].children[0].className === player.token)
-      spaces[i].children[0].classList.add('winner')
+        spaces[i].children[0].className === player.token)
+        spaces[i].children[0].classList.add('winner')
+    };
+  } else if (game.isDraw) {
+    for (var i = 0; i < spaces.length; i++) {
+      spaces[i].children[0].classList.add('draw')
     };
   };
 };
@@ -114,5 +120,5 @@ function clearBoard() {
   game.resetBoard();
   changeGameHeader(player)
   renderBoard();
-  toggleWiggle(player);
+  toggleWiggleAnimation(player);
 };
