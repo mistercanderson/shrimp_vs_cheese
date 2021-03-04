@@ -30,6 +30,7 @@ function playGame() {
     changeGameHeader(player);
     if (game.isWon) {
       renderBoard();
+      toggleWiggle(player);
       player.saveWinsToStorage(game);
       setTimeout(function(){clearBoard()}, 2500);
     } else {
@@ -75,11 +76,14 @@ function checkCurrentSpace() {
 };
 
 function toggleWiggle(player) {
-  if (player.token === 'shrimp') {
+  if (player.token === 'shrimp' && !game.isWon) {
     player1Column.classList.remove('current-player');
     player2Column.classList.add('current-player')
-  } else if (player.token === 'cheese') {
+  } else if (player.token === 'cheese' && !game.isWon) {
     player1Column.classList.add('current-player');
+    player2Column.classList.remove('current-player')
+  } else if (game.isWon) {
+    player1Column.classList.remove('current-player');
     player2Column.classList.remove('current-player')
   };
 };
@@ -99,4 +103,5 @@ function clearBoard() {
   game.resetBoard();
   changeGameHeader(player)
   renderBoard();
+  toggleWiggle(player);
 };
