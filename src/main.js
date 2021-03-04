@@ -1,4 +1,5 @@
 var game = createGame();
+var gameSection = document.querySelector('.game')
 var gameBoard = document.querySelector('.game-board');
 var spaces = gameBoard.children;
 var player1Column = document.getElementById('playerOne');
@@ -11,25 +12,38 @@ function createGame() {
   var ticTacToe = new Game(3, 3);
   var shrimp = new Player('shrimp', true);
   var cheese = new Player('cheese');
-  // ticTacToe.board = ticTacToe.createBoard();
   ticTacToe.addPlayers(shrimp, cheese);
   return ticTacToe
 };
 
 function playGame() {
-  if (event.target.classList.contains('squares')) {
-    move();
-  };
-};
-
-function move() {
   var player = checkCurrentPlayer();
   var space = checkCurrentSpace();
+  if (event.target.classList.contains('squares')) {
+    move(player, space);
+    callAWinner(player);
+    renderBoard();
+  };
+  // console.log(gameStatus)
+};
+
+function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
     toggleWiggle(player);
-    renderBoard();
+
+    // game.checkForWin(player);
   };
+};
+
+function callAWinner(player) {
+  var gameHeader = gameSection.children[0];
+  var gameDisplay = 'SHRIMP VS. CHEESE';
+  if (game.checkForWin(player)) {
+    gameDisplay = game.checkForWin(player);
+    game.resetBoard();
+  };
+  gameHeader.innerText = gameDisplay.toUpperCase()
 };
 
 function checkCurrentPlayer() {

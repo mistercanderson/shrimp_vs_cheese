@@ -27,27 +27,22 @@ class Game {
       for (var i = 0; i < this.players.length; i++) {
         this.players[i].exchangeTurns();
       };
-      return this.checkForWin(player);
     } else {
-      return 0;
+      return false;
     };
   };
 
   checkForWin(player) {
     if (this.horizontalCheck(player)) {
       player.wins++;
-      this.resetGame();
-      return `${player.token} wins!`
+      return `${player.token} wins`
     } else if (this.verticalCheck(player)) {
       player.wins++;
-      this.resetGame();
-      return `${player.token} wins!`
+      return `${player.token} wins`
     } else if (this.diagonalCheck(player)) {
       player.wins++;
-      this.resetGame();
-      return `${player.token} wins!`
+      return `${player.token} wins`
     } else if (this.board.every(this.drawCheck)) {
-      this.resetGame();
       return `It's a Draw`
     } else {
       return false
@@ -109,7 +104,7 @@ class Game {
   };
 
 
-  resetGame() {
+  resetBoard() {
     for (var i = 0; i < this.board.length; i++) {
       this.board[i] = '';
     };
