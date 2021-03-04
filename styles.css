@@ -83,6 +83,10 @@ body {
   animation: wiggle .3s infinite alternate ease-in-out;
 }
 
+.winner {
+  animation: winner 2.5s ease-out;
+}
+
 /* @-webkit-keyframes wiggle {
   from {  }
   to {  }
@@ -100,6 +104,18 @@ body {
 
   100% {
     transform: rotate(40deg)
+  }
+}
+
+@keyframes winner {
+  0% {}
+
+  50% {
+    transform: scale(2)
+  }
+
+  100% {
+    transform: scale(1)
   }
 }
 

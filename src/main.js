@@ -31,6 +31,7 @@ function playGame() {
     if (game.isWon) {
       renderBoard();
       toggleWiggle(player);
+      winnerAnimation();
       player.saveWinsToStorage(game);
       setTimeout(function(){clearBoard()}, 2500);
     } else {
@@ -88,13 +89,23 @@ function toggleWiggle(player) {
   };
 };
 
+function winnerAnimation() {
+  if (game.isWon) {
+    for (var i = 0; i < spaces.length; i++) {
+      if (spaces[i].children[0] &&
+          spaces[i].children[0].className === player.token)
+      spaces[i].children[0].classList.add('winner')
+    };
+  };
+};
+
 function renderBoard() {
   for (var i = 0; i < game.board.length; i++) {
     spaces[i].innerHTML = '';
     if (game.board[i] === 'shrimp') {
-      spaces[i].innerHTML += '<img src="./assets/shrimp.svg" alt="shrimp">'
+      spaces[i].innerHTML += '<img class="shrimp" src="./assets/shrimp.svg" alt="shrimp">'
     } else if (game.board[i] === 'cheese') {
-      spaces[i].innerHTML += '<img src="./assets/cheese.svg" alt="cheese">'
+      spaces[i].innerHTML += '<img class="cheese" src="./assets/cheese.svg" alt="cheese">'
     };
   };
 };
