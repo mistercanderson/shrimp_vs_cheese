@@ -1,4 +1,8 @@
-var game = createGame();
+// Data Model
+var game = createGame('shrimp', 'cheese');
+var player = checkCurrentPlayer();
+
+// DOM Elements
 var gameSection = document.querySelector('.game')
 var gameHeader = gameSection.children[0];
 var gameBoard = document.querySelector('.game-board');
@@ -6,20 +10,21 @@ var spaces = gameBoard.children;
 var player1Column = document.getElementById('playerOne');
 var player2Column = document.getElementById('playerTwo')
 
+// Event Listeners
 gameBoard.addEventListener('click', playGame);
-window.addEventListener('load', checkCurrentPlayer);
 
-function createGame() {
+// Functions
+function createGame(player1, player2) {
   var ticTacToe = new Game(3, 3);
-  var shrimp = new Player('shrimp', true);
-  var cheese = new Player('cheese');
-  ticTacToe.addPlayers(shrimp, cheese);
+  var p1 = new Player(player1, true);
+  var p2 = new Player(player2);
+  ticTacToe.addPlayers(p1, p2);
   return ticTacToe
 };
 
 function playGame() {
   if (event.target.classList.contains('squares')) {
-    var player = checkCurrentPlayer();
+    player = checkCurrentPlayer();
     var space = checkCurrentSpace();
     move(player, space);
     changeGameHeader(player);
@@ -71,11 +76,11 @@ function checkCurrentSpace() {
 
 function toggleWiggle(player) {
   if (player.token === 'shrimp') {
-    playerOne.classList.remove('current-player');
-    playerTwo.classList.add('current-player')
+    player1Column.classList.remove('current-player');
+    player2Column.classList.add('current-player')
   } else if (player.token === 'cheese') {
-    playerTwo.classList.remove('current-player');
-    playerOne.classList.add('current-player')
+    player1Column.classList.add('current-player');
+    player2Column.classList.remove('current-player')
   };
 };
 
@@ -92,5 +97,6 @@ function renderBoard() {
 
 function clearBoard() {
   game.resetBoard();
+  changeGameHeader(player)
   renderBoard();
 };
