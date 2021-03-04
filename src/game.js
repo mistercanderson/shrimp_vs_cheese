@@ -32,6 +32,7 @@ class Game {
     };
   };
 
+// Add drawCheck
   checkForWin(player) {
     if (this.horizontalCheck(player)) {
       this.resetGame();
@@ -95,6 +96,10 @@ class Game {
     } else {
       return false;
     };
+  };
+
+  drawCheck(player) {
+
   };
 
   resetGame() {
