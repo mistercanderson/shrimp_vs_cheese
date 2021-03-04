@@ -28,10 +28,14 @@ function playGame() {
     var space = checkCurrentSpace();
     move(player, space);
     changeGameHeader(player);
-    if (game.isWon) {
+    if (game.isWon || game.isDraw) {
       renderBoard();
+      toggleWiggleAnimation(player);
+      winnerAnimation();
       player.saveWinsToStorage(game);
-      setTimeout(function(){clearBoard()}, 2500);
+      setTimeout(function() {
+        clearBoard()
+      }, 2500);
     } else {
       renderBoard();
     };
@@ -42,7 +46,7 @@ function playGame() {
 function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
-    toggleWiggle(player);
+    toggleWiggleAnimation(player);
   };
 };
 
@@ -74,13 +78,32 @@ function checkCurrentSpace() {
   return currentSpace
 };
 
-function toggleWiggle(player) {
-  if (player.token === 'shrimp') {
-    player1Column.classList.remove('current-player');
-    player2Column.classList.add('current-player')
-  } else if (player.token === 'cheese') {
-    player1Column.classList.add('current-player');
-    player2Column.classList.remove('current-player')
+function toggleWiggleAnimation(player) {
+  if (player.token === 'shrimp' && !game.isWon) {
+    player1Column.classList.remove('wiggle');
+    player2Column.classList.add('wiggle')
+  } else if (player.token === 'cheese' && !game.isWon) {
+    player1Column.classList.add('wiggle');
+    player2Column.classList.remove('wiggle')
+  } else if (game.isWon || game.isDraw) {
+    player1Column.classList.remove('wiggle');
+    player2Column.classList.remove('wiggle')
+  };
+};
+
+function winnerAnimation() {
+  if (game.isWon) {
+    for (var i = 0; i < spaces.length; i++) {
+      if (spaces[i].children[0] &&
+        spaces[i].children[0].className === player.token)
+        spaces[i].children[0].classList.add('winner')
+    };
+  } else if (game.isDraw) {
+    for (var i = 0; i < spaces.length; i++) {
+      if (spaces[i].children[0]) {
+        spaces[i].children[0].classList.add('draw')
+      };
+    };
   };
 };
 
@@ -88,9 +111,9 @@ function renderBoard() {
   for (var i = 0; i < game.board.length; i++) {
     spaces[i].innerHTML = '';
     if (game.board[i] === 'shrimp') {
-      spaces[i].innerHTML += '<img src="./assets/shrimp.svg" alt="shrimp">'
+      spaces[i].innerHTML += '<img class="shrimp" src="./assets/shrimp.svg" alt="shrimp">'
     } else if (game.board[i] === 'cheese') {
-      spaces[i].innerHTML += '<img src="./assets/cheese.svg" alt="cheese">'
+      spaces[i].innerHTML += '<img class="cheese" src="./assets/cheese.svg" alt="cheese">'
     };
   };
 };
@@ -99,4 +122,5 @@ function clearBoard() {
   game.resetBoard();
   changeGameHeader(player)
   renderBoard();
+  toggleWiggleAnimation(player);
 };

@@ -18,6 +18,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  z-index: -1;
   flex-grow: 1;
   background: red;
 }
@@ -78,9 +79,17 @@ body {
   border-bottom: 5px solid white;
 }
 
-.current-player {
+.wiggle {
   /* -webkit-animation: wiggle 1s infinite; */
   animation: wiggle .3s infinite alternate ease-in-out;
+}
+
+.winner {
+  animation: winner 2.5s ease-in-out;
+}
+
+.draw {
+  animation: draw 2.5s ease-in-out;
 }
 
 /* @-webkit-keyframes wiggle {
@@ -100,6 +109,30 @@ body {
 
   100% {
     transform: rotate(40deg)
+  }
+}
+
+@keyframes winner {
+  0% {}
+
+  40% {
+    transform: scale3d(2, 2.5, 1);
+  }
+
+  100% {
+    transform: scale3d(0, 0, 0)
+  }
+}
+
+@keyframes draw {
+  0% {}
+
+  30% {
+    transform: scale3d(2, 2, 1)
+  }
+
+  100% {
+    transform: scale3d(2, 0, 1);
   }
 }
 
