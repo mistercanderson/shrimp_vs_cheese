@@ -1,35 +1,59 @@
-var game = createGame();
+// Data Model
+var game = createGame('shrimp', 'cheese');
+var player = checkCurrentPlayer();
+
+// DOM Elements
+var gameSection = document.querySelector('.game')
+var gameHeader = gameSection.children[0];
 var gameBoard = document.querySelector('.game-board');
 var spaces = gameBoard.children;
 var player1Column = document.getElementById('playerOne');
 var player2Column = document.getElementById('playerTwo')
 
+// Event Listeners
 gameBoard.addEventListener('click', playGame);
-window.addEventListener('load', checkCurrentPlayer);
 
-function createGame() {
+// Functions
+function createGame(player1, player2) {
   var ticTacToe = new Game(3, 3);
-  var shrimp = new Player('shrimp', true);
-  var cheese = new Player('cheese');
-  ticTacToe.board = ticTacToe.createBoard();
-  ticTacToe.addPlayers(shrimp, cheese);
+  var p1 = new Player(player1, true);
+  var p2 = new Player(player2);
+  ticTacToe.addPlayers(p1, p2);
   return ticTacToe
 };
 
 function playGame() {
   if (event.target.classList.contains('squares')) {
-    move();
+    player = checkCurrentPlayer();
+    var space = checkCurrentSpace();
+    move(player, space);
+    changeGameHeader(player);
+    if (game.isWon) {
+      renderBoard();
+      player.saveWinsToStorage(game);
+      setTimeout(function(){clearBoard()}, 2500);
+    } else {
+      renderBoard();
+    };
   };
 };
 
-function move() {
-  var player = checkCurrentPlayer();
-  var space = checkCurrentSpace();
+
+function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
     toggleWiggle(player);
-    renderBoard();
   };
+};
+
+function changeGameHeader(player) {
+  var hasWinner = game.checkForWin(player);
+  var gameDisplay = 'SHRIMP VS. CHEESE';
+  if (hasWinner) {
+    gameDisplay = hasWinner;
+    gameHeader.innerText = hasWinner
+  };
+  gameHeader.innerText = gameDisplay.toUpperCase()
 };
 
 function checkCurrentPlayer() {
@@ -52,17 +76,17 @@ function checkCurrentSpace() {
 
 function toggleWiggle(player) {
   if (player.token === 'shrimp') {
-    playerOne.classList.remove('current-player');
-    playerTwo.classList.add('current-player')
+    player1Column.classList.remove('current-player');
+    player2Column.classList.add('current-player')
   } else if (player.token === 'cheese') {
-    playerTwo.classList.remove('current-player');
-    playerOne.classList.add('current-player')
+    player1Column.classList.add('current-player');
+    player2Column.classList.remove('current-player')
   };
 };
 
 function renderBoard() {
-  clearBoard();
   for (var i = 0; i < game.board.length; i++) {
+    spaces[i].innerHTML = '';
     if (game.board[i] === 'shrimp') {
       spaces[i].innerHTML += '<img src="./assets/shrimp.svg" alt="shrimp">'
     } else if (game.board[i] === 'cheese') {
@@ -71,17 +95,8 @@ function renderBoard() {
   };
 };
 
-// function renderSpace(space) {
-//   var token = game.board[space];
-//   event.target.innerHTML += `<img src="./assets/${token}.svg" alt="${token}">`;
-// };
-
 function clearBoard() {
-  for (var i = 0; i < spaces.length; i++) {
-    spaces[i].innerHTML = ''
-  };
+  game.resetBoard();
+  changeGameHeader(player)
+  renderBoard();
 };
-// shrimp tag:
-// `<img src="./assets/shrimp.svg" alt="shrimp">`
-// cheese tag:
-// `<img src="./assets/cheese.svg" alt="cheese">`

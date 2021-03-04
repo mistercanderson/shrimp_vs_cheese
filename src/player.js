@@ -4,14 +4,14 @@ class Player {
     this.id = id || Math.floor(Date.now() * Math.random());
     this.token = token;
     this.isTurn = isTurn || false;
-    this.isWinner = false;
-    this.wins = wins || 0;
+    this.wins = wins || [];
+    this.winTotal = 0;
   };
 
   saveWinsToStorage(game) {
-    if (this.isWinner) {
-      this.wins.push(game)
-    };
+    var board = Array.from(game.board);
+    this.wins.push(board);
+    this.winTotal++
   };
 
   retreiveWinsFromStorage(wins) {

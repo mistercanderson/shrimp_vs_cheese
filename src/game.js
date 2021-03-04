@@ -4,6 +4,8 @@ class Game {
     this.height = height;
     this.width = width;
     this.players = [];
+    this.board = this.createBoard();
+    this.isWon = false;
   };
 
   createBoard() {
@@ -26,27 +28,26 @@ class Game {
       for (var i = 0; i < this.players.length; i++) {
         this.players[i].exchangeTurns();
       };
-      return this.checkForWin(player);
     } else {
-      return 0;
+      return false;
     };
   };
 
-// Add drawCheck
   checkForWin(player) {
     if (this.horizontalCheck(player)) {
-      player.wins++;
-      this.resetGame();
-      return `${player.token} wins!`
+      this.isWon = true;
+      return `${player.token} wins`
     } else if (this.verticalCheck(player)) {
-      player.wins++;
-      this.resetGame();
-      return `${player.token} wins!`
+      this.isWon = true;
+      return `${player.token} wins`
     } else if (this.diagonalCheck(player)) {
-      player.wins++;
-      this.resetGame();
-      return `${player.token} wins!`
+      this.isWon = true;
+      return `${player.token} wins`
+    } else if (this.board.every(this.drawCheck)) {
+      this.isWon = true;
+      return `It's a Draw`
     } else {
+      this.isWon = false;
       return false
     };
   };
@@ -101,11 +102,12 @@ class Game {
     };
   };
 
-  drawCheck(player) {
-
+  drawCheck(space) {
+    return space.length > 0;
   };
 
-  resetGame() {
+
+  resetBoard() {
     for (var i = 0; i < this.board.length; i++) {
       this.board[i] = '';
     };
