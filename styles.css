@@ -85,15 +85,17 @@ body {
 }
 
 .wiggle {
-  /* -webkit-animation: wiggle 1s infinite; */
+  -webkit-animation: wiggle .3s infinite alternate ease-in-out;
   animation: wiggle .3s infinite alternate ease-in-out;
 }
 
 .winner {
+  -webkit-animation: winner 2.5s ease-in-out;
   animation: winner 2.5s ease-in-out;
 }
 
 .draw {
+  -webkit-animation: draw 2.5s ease-in-out;
   animation: draw 2.5s ease-in-out;
 }
 
@@ -101,29 +103,33 @@ body {
   pointer-events: none;
 }
 
-/* @-webkit-keyframes wiggle {
-  from {  }
-  to {  }
-}
-@-o-keyframes wiggle {
-  from {  }
-  to {  }
-}
-@-moz-keyframes wiggle {
-  from {  }
-  to {  }
-} */
-@keyframes wiggle {
-  0% {}
-
+/* Wiggle Animation */
+@-webkit-keyframes wiggle {
   100% {
     transform: rotate(40deg)
   }
 }
 
-@keyframes winner {
-  0% {}
+@-o-keyframes wiggle {
+  100% {
+    transform: rotate(40deg)
+  }
+}
 
+@-moz-keyframes wiggle {
+  100% {
+    transform: rotate(40deg)
+  }
+}
+
+@keyframes wiggle {
+  100% {
+    transform: rotate(40deg)
+  }
+}
+
+/* Winner Animation */
+@-webkit-keyframes winner {
   40% {
     transform: scale3d(2, 2.5, 1);
   }
@@ -133,9 +139,68 @@ body {
   }
 }
 
-@keyframes draw {
-  0% {}
+@-o-keyframes winner {
+  40% {
+    transform: scale3d(2, 2.5, 1);
+  }
 
+  100% {
+    transform: scale3d(0, 0, 0)
+  }
+}
+
+@-moz-keyframes winner {
+  40% {
+    transform: scale3d(2, 2.5, 1);
+  }
+
+  100% {
+    transform: scale3d(0, 0, 0)
+  }
+}
+
+@keyframes winner {
+  40% {
+    transform: scale3d(2, 2.5, 1);
+  }
+
+  100% {
+    transform: scale3d(0, 0, 0)
+  }
+}
+
+/* Draw Animation */
+@-webkit-keyframes draw {
+  30% {
+    transform: scale3d(2, 2, 1)
+  }
+
+  100% {
+    transform: scale3d(2, 0, 1);
+  }
+}
+
+@-o-keyframes draw {
+  30% {
+    transform: scale3d(2, 2, 1)
+  }
+
+  100% {
+    transform: scale3d(2, 0, 1);
+  }
+}
+
+@-moz-keyframes draw {
+  30% {
+    transform: scale3d(2, 2, 1)
+  }
+
+  100% {
+    transform: scale3d(2, 0, 1);
+  }
+}
+
+@keyframes draw {
   30% {
     transform: scale3d(2, 2, 1)
   }
