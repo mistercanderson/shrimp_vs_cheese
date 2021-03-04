@@ -78,6 +78,31 @@ body {
   border-bottom: 5px solid white;
 }
 
+.current-player {
+  /* -webkit-animation: wiggle 1s infinite; */
+  animation: wiggle .3s infinite alternate ease-in-out;
+}
+
+/* @-webkit-keyframes wiggle {
+  from {  }
+  to {  }
+}
+@-o-keyframes wiggle {
+  from {  }
+  to {  }
+}
+@-moz-keyframes wiggle {
+  from {  }
+  to {  }
+} */
+@keyframes wiggle {
+  0% {}
+
+  100% {
+    transform: rotate(40deg)
+  }
+}
+
 @media only screen and (max-device-width: 480px) {
   .players {
     display: none;
