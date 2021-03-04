@@ -31,7 +31,7 @@ function playGame() {
     if (game.isWon || game.isDraw) {
       renderBoard();
       toggleWiggleAnimation(player);
-      winnerAnimation();
+      gameEndAnimation();
       disableBoard();
       player.saveWinsToStorage(game);
       setTimeout(function() {
@@ -93,7 +93,7 @@ function toggleWiggleAnimation(player) {
   };
 };
 
-function winnerAnimation() {
+function gameEndAnimation() {
   if (game.isWon) {
     for (var i = 0; i < spaces.length; i++) {
       if (spaces[i].children[0] &&
