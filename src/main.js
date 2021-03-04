@@ -11,7 +11,7 @@ function createGame() {
   var ticTacToe = new Game(3, 3);
   var shrimp = new Player('shrimp', true);
   var cheese = new Player('cheese');
-  ticTacToe.board = ticTacToe.createBoard();
+  // ticTacToe.board = ticTacToe.createBoard();
   ticTacToe.addPlayers(shrimp, cheese);
   return ticTacToe
 };

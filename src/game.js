@@ -4,6 +4,7 @@ class Game {
     this.height = height;
     this.width = width;
     this.players = [];
+    this.board = this.createBoard();
   };
 
   createBoard() {
@@ -32,7 +33,6 @@ class Game {
     };
   };
 
-// Add drawCheck
   checkForWin(player) {
     if (this.horizontalCheck(player)) {
       player.wins++;
@@ -46,6 +46,9 @@ class Game {
       player.wins++;
       this.resetGame();
       return `${player.token} wins!`
+    } else if (this.board.every(this.drawCheck)) {
+      this.resetGame();
+      return `It's a Draw`
     } else {
       return false
     };
@@ -101,9 +104,10 @@ class Game {
     };
   };
 
-  drawCheck(player) {
-
+  drawCheck(space) {
+    return space.length > 0;
   };
+
 
   resetGame() {
     for (var i = 0; i < this.board.length; i++) {
