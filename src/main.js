@@ -32,12 +32,14 @@ function playGame() {
       renderBoard();
       toggleWiggleAnimation(player);
       winnerAnimation();
+      disableBoard();
       player.saveWinsToStorage(game);
       setTimeout(function() {
         clearBoard()
       }, 2500);
     } else {
       renderBoard();
+
     };
   };
 };
@@ -123,4 +125,13 @@ function clearBoard() {
   changeGameHeader(player)
   renderBoard();
   toggleWiggleAnimation(player);
+  enableBoard();
 };
+
+function disableBoard() {
+  gameBoard.classList.add('disable-board')
+}
+
+function enableBoard() {
+  gameBoard.classList.remove('disable-board')
+}
