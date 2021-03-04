@@ -1,8 +1,11 @@
 var game = createGame();
 var gameBoard = document.querySelector('.game-board');
 var spaces = gameBoard.children;
+var player1Column = document.getElementById('playerOne');
+var player2Column = document.getElementById('playerTwo')
 
 gameBoard.addEventListener('click', playGame);
+window.addEventListener('load', checkCurrentPlayer);
 
 function createGame() {
   var ticTacToe = new Game(3, 3);
@@ -24,6 +27,7 @@ function move() {
   var space = checkCurrentSpace();
   if (!game.board[space]) {
     game.makeMove(player, space);
+    toggleWiggle(player);
     renderBoard();
   };
 };
@@ -44,6 +48,16 @@ function checkCurrentSpace() {
     };
   };
   return currentSpace
+};
+
+function toggleWiggle(player) {
+  if (player.token === 'shrimp') {
+    playerOne.classList.remove('current-player');
+    playerTwo.classList.add('current-player')
+  } else if (player.token === 'cheese') {
+    playerTwo.classList.remove('current-player');
+    playerOne.classList.add('current-player')
+  };
 };
 
 function renderBoard() {
