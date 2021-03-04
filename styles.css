@@ -6,6 +6,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
+  font-family: 'DotGothic16', sans-serif;
   display: flex;
   justify-content: space-between;
   background: yellow;
@@ -21,6 +22,11 @@ body {
   background: red;
 }
 
+.players>img {
+  margin-top: 10%;
+  width: 5em;
+}
+
 .game {
   display: flex;
   flex-direction: column;
@@ -29,30 +35,42 @@ body {
   flex-grow: 2;
   background: blue;
   padding-bottom: 5%;
-  padding-top: 5%;
+  padding-top: 3%;
+  overflow-y: scroll;
+}
+
+.game::-webkit-scrollbar {
+  display: none;
+}
+
+.game>h1 {
+  padding-bottom: 10%;
 }
 
 .game-board {
   width: 80%;
   height: 80%;
-  background: grey;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
 }
 
-/* could be useful for keeping game-board square 👇 */
-/* .game-board:after {
-
-} */
-
 .squares {
-  /* width: 100%;
-  height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
-  color: black;
-  border: 1px solid black;
+}
+
+.squares>img {
+  width: 2em;
+}
+
+.center {
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+}
+
+.mid {
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
 }
