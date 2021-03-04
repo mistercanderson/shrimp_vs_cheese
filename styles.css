@@ -1,0 +1,58 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  background: yellow;
+  color: white;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  background: red;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 2;
+  background: blue;
+  padding-bottom: 5%;
+  padding-top: 5%;
+}
+
+.game-board {
+  width: 80%;
+  height: 80%;
+  background: grey;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+}
+
+/* could be useful for keeping game-board square 👇 */
+/* .game-board:after {
+
+} */
+
+.squares {
+  /* width: 100%;
+  height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
