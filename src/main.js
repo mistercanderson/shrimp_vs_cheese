@@ -1,5 +1,6 @@
 var game = createGame();
 var gameSection = document.querySelector('.game')
+var gameHeader = gameSection.children[0];
 var gameBoard = document.querySelector('.game-board');
 var spaces = gameBoard.children;
 var player1Column = document.getElementById('playerOne');
@@ -17,31 +18,37 @@ function createGame() {
 };
 
 function playGame() {
-  var player = checkCurrentPlayer();
-  var space = checkCurrentSpace();
+
+
+
   if (event.target.classList.contains('squares')) {
+    var player = checkCurrentPlayer();
+    var space = checkCurrentSpace();
     move(player, space);
-    callAWinner(player);
-    renderBoard();
+    changeGameHeader(player);
+    if (game.isWon) {
+      renderBoard();
+      setTimeout(function(){clearBoard()}, 2500);
+    } else {
+      renderBoard();
+    };
   };
-  // console.log(gameStatus)
 };
+
 
 function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
     toggleWiggle(player);
-
-    // game.checkForWin(player);
   };
 };
 
-function callAWinner(player) {
-  var gameHeader = gameSection.children[0];
+function changeGameHeader(player) {
+  var hasWinner = game.checkForWin(player);
   var gameDisplay = 'SHRIMP VS. CHEESE';
-  if (game.checkForWin(player)) {
-    gameDisplay = game.checkForWin(player);
-    game.resetBoard();
+  if (hasWinner) {
+    gameDisplay = hasWinner;
+    gameHeader.innerText = hasWinner
   };
   gameHeader.innerText = gameDisplay.toUpperCase()
 };
@@ -75,8 +82,8 @@ function toggleWiggle(player) {
 };
 
 function renderBoard() {
-  clearBoard();
   for (var i = 0; i < game.board.length; i++) {
+    spaces[i].innerHTML = '';
     if (game.board[i] === 'shrimp') {
       spaces[i].innerHTML += '<img src="./assets/shrimp.svg" alt="shrimp">'
     } else if (game.board[i] === 'cheese') {
@@ -85,17 +92,9 @@ function renderBoard() {
   };
 };
 
-// function renderSpace(space) {
-//   var token = game.board[space];
-//   event.target.innerHTML += `<img src="./assets/${token}.svg" alt="${token}">`;
-// };
-
 function clearBoard() {
   for (var i = 0; i < spaces.length; i++) {
     spaces[i].innerHTML = ''
   };
+  game.resetBoard();
 };
-// shrimp tag:
-// `<img src="./assets/shrimp.svg" alt="shrimp">`
-// cheese tag:
-// `<img src="./assets/cheese.svg" alt="cheese">`

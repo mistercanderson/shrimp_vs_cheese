@@ -5,6 +5,7 @@ class Game {
     this.width = width;
     this.players = [];
     this.board = this.createBoard();
+    this.isWon = false;
   };
 
   createBoard() {
@@ -34,17 +35,22 @@ class Game {
 
   checkForWin(player) {
     if (this.horizontalCheck(player)) {
-      player.wins++;
+      this.isWon = true;
+      player.saveWinsToStorage(this)
       return `${player.token} wins`
     } else if (this.verticalCheck(player)) {
-      player.wins++;
+      this.isWon = true;
+      player.saveWinsToStorage(this)
       return `${player.token} wins`
     } else if (this.diagonalCheck(player)) {
-      player.wins++;
+      this.isWon = true;
+      player.saveWinsToStorage(this)
       return `${player.token} wins`
     } else if (this.board.every(this.drawCheck)) {
+      this.isWon = true;
       return `It's a Draw`
     } else {
+      this.isWon = false;
       return false
     };
   };
