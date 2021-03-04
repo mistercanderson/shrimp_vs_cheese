@@ -18,9 +18,6 @@ function createGame() {
 };
 
 function playGame() {
-
-
-
   if (event.target.classList.contains('squares')) {
     var player = checkCurrentPlayer();
     var space = checkCurrentSpace();
@@ -28,6 +25,8 @@ function playGame() {
     changeGameHeader(player);
     if (game.isWon) {
       renderBoard();
+      // console.log(game.board)
+      // player.saveWinsToStorage(game.board)
       setTimeout(function(){clearBoard()}, 2500);
     } else {
       renderBoard();
@@ -93,8 +92,6 @@ function renderBoard() {
 };
 
 function clearBoard() {
-  for (var i = 0; i < spaces.length; i++) {
-    spaces[i].innerHTML = ''
-  };
   game.resetBoard();
+  renderBoard();
 };
