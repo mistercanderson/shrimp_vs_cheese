@@ -65,6 +65,10 @@ body {
   align-items: center;
 }
 
+.squares:hover {
+  cursor: pointer;
+}
+
 .squares>img {
   width: 2em;
 }
@@ -90,6 +94,10 @@ body {
 
 .draw {
   animation: draw 2.5s ease-in-out;
+}
+
+.disable-board {
+  pointer-events: none;
 }
 
 /* @-webkit-keyframes wiggle {
