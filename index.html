@@ -4,28 +4,32 @@
 <head>
   <title>Tic-Tac-Toe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link FONTS> -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 
 <body>
-  <h1>Tic-Tac-Toe!</h1>
-  <section class="player-1">
 
+  <section class="players" id="playerOne">
+    <img src="./assets/shrimp.svg" alt="shrimp">
   </section>
-  <main class="game-board">
-    <div class="top-row" id="topLeft"></div>
-    <div class="top-row" id="topCenter"></div>
-    <div class="top-row" id="topRight"></div>
-    <div class="mid-row" id="midLeft"></div>
-    <div class="mid-row" id="midCenter"></div>
-    <div class="mid-row" id="midRight"></div>
-    <div class="bottom-row" id="bottomLeft"></div>
-    <div class="bottom-row" id="bottomCenter"></div>
-    <div class="bottom-row" id="bottomRight"></div>
+  <main class="game">
+    <h1>SHRIMP VS. CHEESE</h1>
+    <section class="game-board">
+      <div class="squares" id="topLeft"><img src="./assets/shrimp.svg" alt="shrimp"></div>
+      <div class="squares center" id="topCenter"><img src="./assets/cheese.svg" alt="cheese"></div>
+      <div class="squares" id="topRight"></div>
+      <div class="squares mid" id="midLeft"></div>
+      <div class="squares mid center" id="midCenter"><img src="./assets/shrimp.svg" alt="shrimp"></div>
+      <div class="squares mid" id="midRight"><img src="./assets/cheese.svg" alt="shrimp"></div>
+      <div class="squares" id="bottomLeft"><img src="./assets/shrimp.svg" alt="shrimp"></div>
+      <div class="squares center" id="bottomCenter"><img src="./assets/shrimp.svg" alt="shrimp"></div>
+      <div class="squares" id="bottomRight"><img src="./assets/cheese.svg" alt="shrimp"></div>
+    </section>
   </main>
-  <section class="player-2">
-
+  <section class="players" id="playerTwo">
+    <img src="./assets/cheese.svg" alt="cheese">
   </section>
   <script src="./src/player.js"></script>
   <script src="./src/game.js"></script>

@@ -1,0 +1,89 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'DotGothic16', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  background: yellow;
+  color: white;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  background: red;
+}
+
+.players>img {
+  margin-top: 10%;
+  width: 5em;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 2;
+  background: blue;
+  padding-bottom: 5%;
+  padding-top: 3%;
+  overflow-y: scroll;
+}
+
+.game::-webkit-scrollbar {
+  display: none;
+}
+
+.game>h1 {
+  padding-bottom: 10%;
+  text-align: center;
+}
+
+.game-board {
+  width: 80%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+}
+
+.squares {
+  min-height: 6em;
+  min-width: 6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.squares>img {
+  width: 2em;
+}
+
+.center {
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+}
+
+.mid {
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .players {
+    display: none;
+  }
+
+  .game {
+    padding-bottom: 15%;
+  }
+}
