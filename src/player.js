@@ -5,10 +5,13 @@ class Player {
     this.token = token;
     this.isTurn = isTurn || false;
     this.wins = wins || [];
+    this.winTotal = 0;
   };
 
   saveWinsToStorage(game) {
-    this.wins.push(game)
+    var board = Array.from(game.board);
+    this.wins.push(board);
+    this.winTotal++
   };
 
   retreiveWinsFromStorage(wins) {

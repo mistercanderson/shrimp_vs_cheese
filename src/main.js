@@ -25,8 +25,7 @@ function playGame() {
     changeGameHeader(player);
     if (game.isWon) {
       renderBoard();
-      // console.log(game.board)
-      // player.saveWinsToStorage(game.board)
+      player.saveWinsToStorage(game);
       setTimeout(function(){clearBoard()}, 2500);
     } else {
       renderBoard();
