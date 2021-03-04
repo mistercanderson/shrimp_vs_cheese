@@ -80,14 +80,14 @@ function checkCurrentSpace() {
 
 function toggleWiggleAnimation(player) {
   if (player.token === 'shrimp' && !game.isWon) {
-    player1Column.classList.remove('current-player');
-    player2Column.classList.add('current-player')
+    player1Column.classList.remove('wiggle');
+    player2Column.classList.add('wiggle')
   } else if (player.token === 'cheese' && !game.isWon) {
-    player1Column.classList.add('current-player');
-    player2Column.classList.remove('current-player')
+    player1Column.classList.add('wiggle');
+    player2Column.classList.remove('wiggle')
   } else if (game.isWon || game.isDraw) {
-    player1Column.classList.remove('current-player');
-    player2Column.classList.remove('current-player')
+    player1Column.classList.remove('wiggle');
+    player2Column.classList.remove('wiggle')
   };
 };
 
@@ -100,7 +100,9 @@ function winnerAnimation() {
     };
   } else if (game.isDraw) {
     for (var i = 0; i < spaces.length; i++) {
-      spaces[i].children[0].classList.add('draw')
+      if (spaces[i].children[0]) {
+        spaces[i].children[0].classList.add('draw')
+      };
     };
   };
 };

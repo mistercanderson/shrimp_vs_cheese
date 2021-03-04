@@ -112,5 +112,7 @@ class Game {
     for (var i = 0; i < this.board.length; i++) {
       this.board[i] = '';
     };
+    this.isWon = false;
+    this.isDraw = false
   };
 };
