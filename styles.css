@@ -17,14 +17,15 @@ body {
 }
 
 button {
+  height: 100%;
+  width: 100%;
   border: none;
   background: none;
   font-family: 'DotGothic16', sans-serif;
   color: white;
   cursor: pointer;
-  padding: 10%;
   z-index: 2;
-  transition: transform .1s ease-in;
+  transition: transform .1s ease-in-out;
 }
 
 button:focus {
@@ -32,7 +33,8 @@ button:focus {
 }
 
 button:hover {
-  transform: scale(2.5);
+  transform: scale(2);
+  /* font-size: 100%; */
 }
 
 .players {

@@ -50,6 +50,8 @@ function hideButtons() {
 function playGame() {
   startButton();
   playAgain();
+  reset();
+  save();
   if (event.target.classList.contains('squares') && game) {
     player = checkCurrentPlayer();
     var space = checkCurrentSpace();
@@ -78,6 +80,8 @@ function gameWon() {
     }, 2400);
     setTimeout(function() {
       playAgainButton();
+      resetButton();
+      saveButton();
     }, 2500);
   };
 };
@@ -93,6 +97,8 @@ function gameDraw() {
     }, 2400);
     setTimeout(function() {
       playAgainButton();
+      resetButton();
+      saveButton();
     }, 2500);
   };
 };
@@ -102,7 +108,6 @@ function move(player, space) {
     game.makeMove(player, space);
   };
 };
-
 
 function checkCurrentPlayer() {
   for (var i = 0; i < game.players.length; i++) {
@@ -205,12 +210,17 @@ function enableBoard() {
 function displayWinTotal(player) {
   var playerOneWins = document.getElementById('playerOneWins');
   var playerTwoWins = document.getElementById('playerTwoWins');
-  if (player.token === 'shrimp') {
+  if (player.winTotal) {
+    if (player.token === 'shrimp') {
+      playerOneWins.innerHTML = '';
+      playerOneWins.innerHTML += `<p>${player.winTotal}</p>`;
+    } else if (player.token === 'cheese') {
+      playerTwoWins.innerHTML = '';
+      playerTwoWins.innerHTML += `<p>${player.winTotal}</p>`;
+    };
+  } else {
     playerOneWins.innerHTML = '';
-    playerOneWins.innerHTML += `<p>${player.winTotal}</p>`;
-  } else if (player.token === 'cheese') {
     playerTwoWins.innerHTML = '';
-    playerTwoWins.innerHTML += `<p>${player.winTotal}</p>`;
   };
 };
 
@@ -241,13 +251,43 @@ function wobbleText() {
 };
 
 function playAgainButton() {
-  var midSquare = document.getElementById('midCenter');
-  midSquare.innerHTML += `<button id="againButton">AGAIN?</button>`;
+  var topSquare = document.getElementById('topCenter');
+  topSquare.innerHTML += `<button id="againButton">AGAIN?</button>`;
 };
 
 function playAgain() {
   if (event.target.id === 'againButton') {
     toggleWiggleAnimation(player);
     hideButtons();
+  };
+};
+
+function resetButton() {
+  var bottomLeftSquare = document.getElementById('bottomLeft');
+  bottomLeftSquare.innerHTML += `<button id="resetButton">RESET</button>`
+}
+
+function reset() {
+  if (event.target.id === 'resetButton') {
+    for (var i = 0; i < game.players.length; i++) {
+      game.players[i].winTotal = 0;
+      displayWinTotal(game.players[i])
+    };
+    toggleWiggleAnimation(player);
+    hideButtons();
+  };
+};
+
+function saveButton() {
+  var bottomRightSquare = document.getElementById('bottomRight');
+  bottomRightSquare.innerHTML += `<button id="saveButton">SAVE</button>`
+};
+
+function save() {
+  if (event.target.id === 'saveButton') {
+    // write Player data save to local storage here
+    event.target.innerText = 'SAVED';
+    event.target.style.color = 'coral'
+    event.target.disabled = true;
   };
 };
