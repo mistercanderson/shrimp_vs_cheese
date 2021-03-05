@@ -29,20 +29,40 @@ function playGame() {
     move(player, space);
     changeGameHeader(player);
     if (game.isWon || game.isDraw) {
-      renderBoard();
-      toggleWiggleAnimation(player);
-      gameEndAnimation();
-      disableBoard();
-      player.saveWinsToStorage(game);
-      setTimeout(function() {
-        clearBoard()
-      }, 2500);
+      gameWon();
+      gameDraw();
     } else {
       renderBoard();
 
     };
   };
 };
+
+function gameWon() {
+  if (game.isWon) {
+    renderBoard();
+    toggleWiggleAnimation(player);
+    gameEndAnimation();
+    disableBoard();
+    player.saveWinsToStorage(game);
+    setTimeout(function() {
+      displayWinTotal(player)
+      clearBoard()
+    }, 2500);
+  };
+};
+
+function gameDraw() {
+  if (game.isDraw) {
+    renderBoard();
+    toggleWiggleAnimation(player);
+    gameEndAnimation();
+    disableBoard();
+    setTimeout(function() {
+      clearBoard()
+    }, 2500);
+  }
+}
 
 function move(player, space) {
   if (!game.board[space]) {
@@ -51,16 +71,6 @@ function move(player, space) {
   };
 };
 
-function changeGameHeader(player) {
-  var hasWinner = game.checkForWin(player);
-  if (hasWinner) {
-    gameDisplay.innerText = hasWinner.toUpperCase();
-    wobbleText();
-    return
-  };
-  gameDisplay.innerText = 'SHRIMP VS. CHEESE';
-  wobbleText();
-};
 
 function checkCurrentPlayer() {
   for (var i = 0; i < game.players.length; i++) {
@@ -78,6 +88,17 @@ function checkCurrentSpace() {
     };
   };
   return currentSpace
+};
+
+function changeGameHeader(player) {
+  var hasWinner = game.checkForWin(player);
+  if (hasWinner) {
+    gameDisplay.innerText = hasWinner.toUpperCase();
+    wobbleText();
+    return
+  };
+  gameDisplay.innerText = 'SHRIMP VS. CHEESE';
+  wobbleText();
 };
 
 function toggleWiggleAnimation(player) {
@@ -128,8 +149,7 @@ function clearBoard() {
   renderBoard();
   toggleWiggleAnimation(player);
   enableBoard();
-  displayWin(player);
-  displayWinMobile(player);
+  displayWinnerMobile(player);
 };
 
 function disableBoard() {
@@ -140,7 +160,7 @@ function enableBoard() {
   gameBoard.classList.remove('disable-board')
 };
 
-function displayWin(player) {
+function displayWinTotal(player) {
   var playerOneWins = document.getElementById('playerOneWins');
   var playerTwoWins = document.getElementById('playerTwoWins');
   if (player.token === 'shrimp') {
@@ -152,7 +172,7 @@ function displayWin(player) {
   };
 };
 
-function displayWinMobile(player) {
+function displayWinnerMobile(player) {
   if (player.token === 'shrimp') {
     player1Column.classList.add('mobile-win')
     player2Column.classList.remove('mobile-win')
