@@ -39,7 +39,7 @@ function clear() {
     for (var i = 0; i < game.players.length; i++) {
       displayWinTotal(game.players[i]);
     };
-    event.target.disabled = true;
+    checkStorage();
   };
 };
 
@@ -55,6 +55,7 @@ function hideButtons() {
 function checkStorage() {
   if (localStorage.length < 1) {
     document.getElementById('loadButton').disabled = true
+    document.getElementById('clearButton').disabled = true
   };
 };
 
