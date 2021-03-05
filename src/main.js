@@ -33,7 +33,6 @@ function playGame() {
       gameDraw();
     } else {
       renderBoard();
-
     };
   };
 };
@@ -144,12 +143,18 @@ function renderBoard() {
 };
 
 function clearBoard() {
-  game.resetBoard();
-  changeGameHeader(player)
-  renderBoard();
   toggleWiggleAnimation(player);
   enableBoard();
-  displayWinnerMobile(player);
+  if (game.isWon) {
+    displayWinnerMobile(player);
+    game.resetBoard();
+    changeGameHeader(player)
+    renderBoard();
+  } else {
+    game.resetBoard();
+    changeGameHeader(player)
+    renderBoard();
+  }
 };
 
 function disableBoard() {
