@@ -126,12 +126,23 @@ function clearBoard() {
   renderBoard();
   toggleWiggleAnimation(player);
   enableBoard();
+  displayWin(player);
 };
 
 function disableBoard() {
   gameBoard.classList.add('disable-board')
-}
+};
 
 function enableBoard() {
   gameBoard.classList.remove('disable-board')
-}
+};
+
+function displayWin(player) {
+  var playerOne = document.getElementById('playerOneWins');
+  var playerTwo = document.getElementById('playerTwoWins');
+  if (player.token === 'shrimp') {
+    playerOne.innerHTML += `<p>${player.winTotal}</p>`;
+  } else if (player.token === 'cheese') {
+    playerTwo.innerHTML += `<p>${player.winTotal}</p>`;
+  };
+};
