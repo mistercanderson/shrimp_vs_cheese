@@ -11,6 +11,7 @@ var player1Column = document.getElementById('playerOne');
 var player2Column = document.getElementById('playerTwo')
 
 // Event Listeners
+window.addEventListener('load', checkStorage);
 gameBoard.addEventListener('click', playGame);
 
 // Functions
@@ -33,7 +34,9 @@ function startButton() {
 
 function clear() {
   if (event.target.id === "clearButton") {
+    load();
     localStorage.clear();
+    checkStorage();
   };
 };
 
@@ -46,14 +49,24 @@ function hideButtons() {
   player2Column.style.opacity = 1;
 };
 
+function checkStorage() {
+  if (localStorage.length < 1) {
+    document.getElementById('loadButton').disabled = true
+    document.getElementById('clearButton').disabled = true
+  };
+};
 
-function playGame() {
+function buttons() {
   startButton();
   clear();
   load();
   playAgain();
   reset();
   save();
+};
+
+function playGame() {
+  buttons();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
     var space = checkCurrentSpace();
@@ -317,5 +330,7 @@ function load() {
     };
     toggleWiggleAnimation();
     hideButtons();
+  } else if (event.target.id === 'clearButton') {
+    game = createGame('shrimp', 'cheese');
   };
 };

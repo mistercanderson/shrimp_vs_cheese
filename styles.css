@@ -27,6 +27,10 @@ button {
   transition: transform .1s ease-in-out;
 }
 
+button:hover:disabled {
+  cursor: not-allowed;
+}
+
 button:focus {
   outline: none
 }
