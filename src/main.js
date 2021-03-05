@@ -1,6 +1,8 @@
 // Data Model
-var game = createGame('shrimp', 'cheese');
-var player = checkCurrentPlayer();
+var game;
+var player;
+// var game = createGame('shrimp', 'cheese');
+// var player = checkCurrentPlayer();
 
 // DOM Elements
 var gameSection = document.getElementById('game')
@@ -22,11 +24,39 @@ function createGame(player1, player2) {
   return ticTacToe
 };
 
+function startButton() {
+  if (event.target.id === 'startButton') {
+    game = createGame('shrimp', 'cheese');
+    player = checkCurrentPlayer();
+    document.getElementById('shrimp').classList.add('wiggle');
+    hideButtons();
+    return game, player;
+  };
+};
+
+
+
+function hideButtons() {
+  var buttons = document.querySelectorAll('button');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].style.display = 'none';
+  }
+  // event.target.style.display = 'none';
+  player1Column.style.opacity = 1;
+  player2Column.style.opacity = 1;
+};
+
+
 function playGame() {
-  if (event.target.classList.contains('squares')) {
+  startButton();
+  playAgain();
+  reset();
+  save();
+  if (event.target.classList.contains('squares') && game) {
     player = checkCurrentPlayer();
     var space = checkCurrentSpace();
     move(player, space);
+    toggleWiggleAnimation(player);
     changeGameHeader(player);
     if (game.isWon || game.isDraw) {
       gameWon();
@@ -41,12 +71,18 @@ function gameWon() {
   if (game.isWon) {
     renderBoard();
     gameEndAnimation();
+    toggleWiggleAnimation(player);
     disableBoard();
     player.saveWinsToStorage(game);
     setTimeout(function() {
-      displayWinTotal(player)
-      clearBoard()
+      displayWinTotal(player);
+      clearBoard();
     }, 2400);
+    setTimeout(function() {
+      playAgainButton();
+      resetButton();
+      saveButton();
+    }, 2500);
   };
 };
 
@@ -54,20 +90,24 @@ function gameDraw() {
   if (game.isDraw) {
     renderBoard();
     gameEndAnimation();
+    toggleWiggleAnimation(player);
     disableBoard();
     setTimeout(function() {
-      clearBoard()
+      clearBoard();
     }, 2400);
-  }
-}
+    setTimeout(function() {
+      playAgainButton();
+      resetButton();
+      saveButton();
+    }, 2500);
+  };
+};
 
 function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
-    toggleWiggleAnimation(player);
   };
 };
-
 
 function checkCurrentPlayer() {
   for (var i = 0; i < game.players.length; i++) {
@@ -104,10 +144,10 @@ function changeGameHeader(player) {
 function toggleWiggleAnimation(player) {
   var shrimp = document.getElementById('shrimp');
   var cheese = document.getElementById('cheese');
-  if (player.token === 'shrimp' && !game.isWon) {
+  if (player.token === 'shrimp' && !game.isWon && !game.isDraw) {
     shrimp.classList.remove('wiggle');
     cheese.classList.add('wiggle')
-  } else if (player.token === 'cheese' && !game.isWon) {
+  } else if (player.token === 'cheese' && !game.isWon && !game.isDraw) {
     shrimp.classList.add('wiggle');
     cheese.classList.remove('wiggle')
   } else {
@@ -156,7 +196,7 @@ function clearBoard() {
     game.resetBoard();
     changeGameHeader(player)
     renderBoard();
-  }
+  };
 };
 
 function disableBoard() {
@@ -170,12 +210,17 @@ function enableBoard() {
 function displayWinTotal(player) {
   var playerOneWins = document.getElementById('playerOneWins');
   var playerTwoWins = document.getElementById('playerTwoWins');
-  if (player.token === 'shrimp') {
+  if (player.winTotal) {
+    if (player.token === 'shrimp') {
+      playerOneWins.innerHTML = '';
+      playerOneWins.innerHTML += `<p>${player.winTotal}</p>`;
+    } else if (player.token === 'cheese') {
+      playerTwoWins.innerHTML = '';
+      playerTwoWins.innerHTML += `<p>${player.winTotal}</p>`;
+    };
+  } else {
     playerOneWins.innerHTML = '';
-    playerOneWins.innerHTML += `<p>${player.winTotal}</p>`;
-  } else if (player.token === 'cheese') {
     playerTwoWins.innerHTML = '';
-    playerTwoWins.innerHTML += `<p>${player.winTotal}</p>`;
   };
 };
 
@@ -202,5 +247,47 @@ function wobbleText() {
     gameDisplay.classList.add('wobble')
   } else {
     gameDisplay.classList.remove('wobble')
+  };
+};
+
+function playAgainButton() {
+  var topSquare = document.getElementById('topCenter');
+  topSquare.innerHTML += `<button id="againButton">AGAIN?</button>`;
+};
+
+function playAgain() {
+  if (event.target.id === 'againButton') {
+    toggleWiggleAnimation(player);
+    hideButtons();
+  };
+};
+
+function resetButton() {
+  var bottomLeftSquare = document.getElementById('bottomLeft');
+  bottomLeftSquare.innerHTML += `<button id="resetButton">RESET</button>`
+}
+
+function reset() {
+  if (event.target.id === 'resetButton') {
+    for (var i = 0; i < game.players.length; i++) {
+      game.players[i].winTotal = 0;
+      displayWinTotal(game.players[i])
+    };
+    toggleWiggleAnimation(player);
+    hideButtons();
+  };
+};
+
+function saveButton() {
+  var bottomRightSquare = document.getElementById('bottomRight');
+  bottomRightSquare.innerHTML += `<button id="saveButton">SAVE</button>`
+};
+
+function save() {
+  if (event.target.id === 'saveButton') {
+    // write Player data save to local storage here
+    event.target.innerText = 'SAVED';
+    event.target.style.color = 'coral'
+    event.target.disabled = true;
   };
 };

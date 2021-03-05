@@ -9,22 +9,45 @@ body {
   font-family: 'DotGothic16', sans-serif;
   display: flex;
   justify-content: space-between;
-  background: yellow;
+  background: blue;
   color: white;
   user-select: none;
   overflow-x: hidden;
   transition: all 1s
 }
 
+button {
+  height: 100%;
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: 'DotGothic16', sans-serif;
+  color: white;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform .1s ease-in-out;
+}
+
+button:focus {
+  outline: none
+}
+
+button:hover {
+  transform: scale(2);
+  /* font-size: 100%; */
+}
+
 .players {
+  opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   flex-grow: 1;
-  background: red;
+  background: coral;
   color: black;
   overflow-y: scroll;
+  transition: opacity 1.5s ease-in;
 }
 
 .players::-webkit-scrollbar {
@@ -33,7 +56,7 @@ body {
 }
 
 .player-wrapper {
-  background: red;
+  background: coral;
   margin-top: 10%;
   display: flex;
   flex-direction: column;
@@ -88,6 +111,7 @@ body {
 .game-board {
   width: 80%;
   height: 80%;
+  min-height: 25em;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
