@@ -34,11 +34,19 @@ function startButton() {
 
 function clear() {
   if (event.target.id === "clearButton") {
-    load();
-    localStorage.clear();
-    checkStorage();
+    if (window.confirm('Are you sure you want to clear the saved game?')) {
+      if (window.confirm('Like, seriously?')) {
+        window.alert('THE WATERS HAVE BEEN CLEANSED')
+        load();
+        localStorage.clear();
+        checkStorage();
+        event.target.style.color = 'coral'
+      };
+    };
   };
 };
+
+
 
 function hideButtons() {
   var buttons = document.querySelectorAll('button');
