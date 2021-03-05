@@ -12,6 +12,7 @@ body {
   background: yellow;
   color: white;
   user-select: none;
+  overflow-x: hidden
 }
 
 .players {
@@ -19,14 +20,47 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  z-index: -1;
   flex-grow: 1;
   background: red;
+  color: black;
+  overflow-y: scroll;
 }
 
-.players>img {
+.players::-webkit-scrollbar {
+  z-index: -1;
+  display: none;
+}
+
+.player-wrapper {
+  background: red;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: sticky;
+  top: 10%;
+}
+
+.player-wrapper>img {
   margin-top: 10%;
   width: 5em;
+}
+
+.player-wrapper>h3 {
+  text-align: center;
+  padding: 1em 0;
+}
+
+.win-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.win-counter>p {
+  font-size: 4em;
+  color: white;
 }
 
 .game {

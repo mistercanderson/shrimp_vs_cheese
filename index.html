@@ -12,7 +12,13 @@
 <body>
 
   <section class="players">
-    <img class="current-player" id="playerOne" src="./assets/shrimp.svg" alt="shrimp">
+    <div class="player-wrapper">
+      <img class="current-player" id="playerOne" src="./assets/shrimp.svg" alt="shrimp">
+      <h3>PLAYER ONE</h3>
+      <h3>WINS</h3>
+    </div>
+    <header class="win-counter" id="playerOneWins">
+    </header>
   </section>
   <main class="game">
     <h1>SHRIMP VS. CHEESE</h1>
@@ -28,8 +34,14 @@
       <div class="squares" id="bottomRight"></div>
     </section>
   </main>
-  <section class="players" >
-    <img id="playerTwo" src="./assets/cheese.svg" alt="cheese">
+  <section class="players">
+    <div class="player-wrapper">
+      <img id="playerTwo" src="./assets/cheese.svg" alt="cheese">
+      <h3>PLAYER 2</h3>
+      <h3>WINS</h3>
+    </div>
+    <header class="win-counter" id="playerTwoWins">
+    </header>
   </section>
   <script src="./src/player.js"></script>
   <script src="./src/game.js"></script>
