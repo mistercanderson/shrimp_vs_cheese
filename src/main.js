@@ -36,9 +36,6 @@ function clear() {
   if (event.target.id === "clearButton") {
     load();
     localStorage.clear();
-    for (var i = 0; i < game.players.length; i++) {
-      displayWinTotal(game.players[i]);
-    };
     checkStorage();
   };
 };
@@ -59,16 +56,17 @@ function checkStorage() {
   };
 };
 
-
-function playGame() {
+function buttons() {
   startButton();
   clear();
-  if (event.target.id === 'loadButton') {
-    load();
-  };
+  load();
   playAgain();
   reset();
   save();
+};
+
+function playGame() {
+  buttons();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
     var space = checkCurrentSpace();
@@ -334,5 +332,5 @@ function load() {
     hideButtons();
   } else if (event.target.id === 'clearButton') {
     game = createGame('shrimp', 'cheese');
-  }
+  };
 };
