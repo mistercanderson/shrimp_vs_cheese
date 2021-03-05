@@ -39,6 +39,14 @@ button:hover {
   transform: scale(2);
 }
 
+.again:hover {
+  cursor: copy;
+}
+
+.reset:hover {
+  cursor: alias;
+}
+
 .players {
   opacity: 0;
   display: flex;
