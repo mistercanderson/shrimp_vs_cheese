@@ -12,6 +12,7 @@ body {
   background: yellow;
   color: white;
   user-select: none;
+  overflow-x: hidden;
 }
 
 .players {
@@ -22,12 +23,29 @@ body {
   z-index: -1;
   flex-grow: 1;
   background: red;
+  color: black;
 }
 
 .players>img {
   margin-top: 10%;
   width: 5em;
 }
+
+.players>h3 {
+  text-align: center;
+  padding: 1em 0;
+}
+
+.win-counter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.win-counter>div {
+  padding: 0;
+}
+
 
 .game {
   display: flex;
