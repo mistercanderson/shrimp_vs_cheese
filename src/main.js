@@ -40,7 +40,6 @@ function playGame() {
 function gameWon() {
   if (game.isWon) {
     renderBoard();
-    toggleWiggleAnimation(player);
     gameEndAnimation();
     disableBoard();
     player.saveWinsToStorage(game);
@@ -54,7 +53,6 @@ function gameWon() {
 function gameDraw() {
   if (game.isDraw) {
     renderBoard();
-    toggleWiggleAnimation(player);
     gameEndAnimation();
     disableBoard();
     setTimeout(function() {
@@ -89,10 +87,13 @@ function checkCurrentSpace() {
   return currentSpace
 };
 
+function checkWinner() {
+  return game.checkForWin(player);
+};
+
 function changeGameHeader(player) {
-  var hasWinner = game.checkForWin(player);
-  if (hasWinner) {
-    gameDisplay.innerText = hasWinner.toUpperCase();
+  if (checkWinner()) {
+    gameDisplay.innerText = checkWinner().toUpperCase();
     wobbleText();
     return
   };
@@ -109,13 +110,14 @@ function toggleWiggleAnimation(player) {
   } else if (player.token === 'cheese' && !game.isWon) {
     shrimp.classList.add('wiggle');
     cheese.classList.remove('wiggle')
-  } else if (game.isWon || game.isDraw) {
+  } else {
     shrimp.classList.remove('wiggle');
     cheese.classList.remove('wiggle')
   };
 };
 
 function gameEndAnimation() {
+  toggleWiggleAnimation(player)
   if (game.isWon) {
     for (var i = 0; i < spaces.length; i++) {
       if (spaces[i].children[0] &&
