@@ -3,9 +3,9 @@ var game = createGame('shrimp', 'cheese');
 var player = checkCurrentPlayer();
 
 // DOM Elements
-var gameSection = document.querySelector('.game')
-var gameHeader = gameSection.children[0];
-var gameBoard = document.querySelector('.game-board');
+var gameSection = document.getElementById('game')
+var gameDisplay = document.getElementById('gameDisplay');
+var gameBoard = document.getElementById('gameBoard');
 var spaces = gameBoard.children;
 var player1Column = document.getElementById('playerOne');
 var player2Column = document.getElementById('playerTwo')
@@ -53,12 +53,13 @@ function move(player, space) {
 
 function changeGameHeader(player) {
   var hasWinner = game.checkForWin(player);
-  var gameDisplay = 'SHRIMP VS. CHEESE';
   if (hasWinner) {
-    gameDisplay = hasWinner;
-    gameHeader.innerText = hasWinner
+    gameDisplay.innerText = hasWinner.toUpperCase();
+    wobbleText();
+    return
   };
-  gameHeader.innerText = gameDisplay.toUpperCase()
+  gameDisplay.innerText = 'SHRIMP VS. CHEESE';
+  wobbleText();
 };
 
 function checkCurrentPlayer() {
@@ -167,4 +168,12 @@ function displayWinMobile(player) {
 function hideWinMobile() {
   player1Column.classList.remove('mobile-win');
   player2Column.classList.remove('mobile-win')
+};
+
+function wobbleText() {
+  if (gameDisplay.innerText !== 'SHRIMP VS. CHEESE') {
+    gameDisplay.classList.add('wobble')
+  } else {
+    gameDisplay.classList.remove('wobble')
+  };
 };
