@@ -141,8 +141,10 @@ function displayWin(player) {
   var playerOne = document.getElementById('playerOneWins');
   var playerTwo = document.getElementById('playerTwoWins');
   if (player.token === 'shrimp') {
+    playerOne.innerHTML = '';
     playerOne.innerHTML += `<p>${player.winTotal}</p>`;
   } else if (player.token === 'cheese') {
+    playerTwo.innerHTML = '';
     playerTwo.innerHTML += `<p>${player.winTotal}</p>`;
   };
 };
