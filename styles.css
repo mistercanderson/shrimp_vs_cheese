@@ -12,7 +12,8 @@ body {
   background: yellow;
   color: white;
   user-select: none;
-  overflow-x: hidden
+  overflow-x: hidden;
+  transition: all 1s
 }
 
 .players {
@@ -105,7 +106,7 @@ body {
 }
 
 .squares>img {
-  width: 2em;
+  width: 3em;
 }
 
 .center {
@@ -145,25 +146,25 @@ body {
 /* Wiggle Animation */
 @-webkit-keyframes wiggle {
   100% {
-    transform: rotate(40deg)
+    transform: rotate(10deg) perspective(10em) translateZ(2em);
   }
 }
 
 @-o-keyframes wiggle {
   100% {
-    transform: rotate(40deg)
+    transform: rotate(10deg) perspective(10em) translateZ(2em)
   }
 }
 
 @-moz-keyframes wiggle {
   100% {
-    transform: rotate(40deg)
+    transform: rotate(10deg) perspective(10em) translateZ(2em)
   }
 }
 
 @keyframes wiggle {
   100% {
-    transform: rotate(40deg)
+    transform: rotate(10deg) perspective(10em) translateZ(2em);
   }
 }
 
