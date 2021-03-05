@@ -34,6 +34,12 @@ function startButton() {
   };
 };
 
+function clear() {
+  if (event.target.id === "clearButton") {
+    localStorage.clear();
+  };
+};
+
 
 
 function hideButtons() {
@@ -49,6 +55,7 @@ function hideButtons() {
 
 function playGame() {
   startButton();
+  clear();
   playAgain();
   reset();
   save();
@@ -286,9 +293,9 @@ function saveButton() {
 
 function save() {
   if (event.target.id === 'saveButton') {
-  for (var i = 0; i < game.players.length; i++) {
-    localStorage.setItem(`${game.players[i].id}`, JSON.stringify(game.players[i]))
-  };
+    for (var i = 0; i < game.players.length; i++) {
+      localStorage.setItem(`${game.players[i].id}`, JSON.stringify(game.players[i]))
+    };
     event.target.innerText = 'SAVED';
     event.target.style.color = 'coral'
     event.target.disabled = true;
