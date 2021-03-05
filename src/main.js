@@ -281,7 +281,7 @@ function playAgain() {
 function resetButton() {
   var bottomLeftSquare = document.getElementById('bottomLeft');
   bottomLeftSquare.innerHTML += `<button class="reset" id="resetButton">RESET</button>`
-}
+};
 
 function reset() {
   if (event.target.id === 'resetButton') {
@@ -326,11 +326,29 @@ function load() {
       game.players[i].id = playerFiles[i].id;
       game.players[i].isTurn = playerFiles[i].isTurn;
       game.players[i].token = playerFiles[i].token;
-      displayWinTotal(game.players[i]);
     };
+    displayWinTotalOnLoad();
     toggleWiggleAnimation();
     hideButtons();
   } else if (event.target.id === 'clearButton') {
     game = createGame('shrimp', 'cheese');
+  };
+};
+
+function displayWinTotalOnLoad() {
+  var shrimp;
+  var cheese;
+  for (var i = 0; i < game.players.length; i++) {
+    if (game.players[i].token === 'shrimp') {
+      shrimp = game.players[i];
+    } else if (game.players[i].token === 'cheese') {
+      cheese = game.players[i];
+    };
+  };
+  if (shrimp.winTotal) {
+    player1Column.children[1].innerHTML += `<p>${shrimp.winTotal}</p>`
+  };
+  if (cheese.winTotal) {
+    player2Column.children[1].innerHTML += `<p>${cheese.winTotal}</p>`
   };
 };
