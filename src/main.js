@@ -44,7 +44,7 @@ function hideButtons() {
   var buttons = document.querySelectorAll('button');
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].style.display = 'none';
-  }
+  };
   player1Column.style.opacity = 1;
   player2Column.style.opacity = 1;
 };
@@ -56,7 +56,7 @@ function checkStorage() {
   };
 };
 
-function buttons() {
+function buttonFunctions() {
   startButton();
   clear();
   load();
@@ -66,7 +66,7 @@ function buttons() {
 };
 
 function playGame() {
-  buttons();
+  buttonFunctions();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
     var space = checkCurrentSpace();
