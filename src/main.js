@@ -44,7 +44,6 @@ function playGame() {
   };
 };
 
-
 function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
@@ -81,15 +80,17 @@ function checkCurrentSpace() {
 };
 
 function toggleWiggleAnimation(player) {
+  var shrimp = document.getElementById('shrimp');
+  var cheese = document.getElementById('cheese');
   if (player.token === 'shrimp' && !game.isWon) {
-    player1Column.classList.remove('wiggle');
-    player2Column.classList.add('wiggle')
+    shrimp.classList.remove('wiggle');
+    cheese.classList.add('wiggle')
   } else if (player.token === 'cheese' && !game.isWon) {
-    player1Column.classList.add('wiggle');
-    player2Column.classList.remove('wiggle')
+    shrimp.classList.add('wiggle');
+    cheese.classList.remove('wiggle')
   } else if (game.isWon || game.isDraw) {
-    player1Column.classList.remove('wiggle');
-    player2Column.classList.remove('wiggle')
+    shrimp.classList.remove('wiggle');
+    cheese.classList.remove('wiggle')
   };
 };
 
@@ -127,6 +128,7 @@ function clearBoard() {
   toggleWiggleAnimation(player);
   enableBoard();
   displayWin(player);
+  displayWinMobile(player);
 };
 
 function disableBoard() {
@@ -138,13 +140,31 @@ function enableBoard() {
 };
 
 function displayWin(player) {
-  var playerOne = document.getElementById('playerOneWins');
-  var playerTwo = document.getElementById('playerTwoWins');
+  var playerOneWins = document.getElementById('playerOneWins');
+  var playerTwoWins = document.getElementById('playerTwoWins');
   if (player.token === 'shrimp') {
-    playerOne.innerHTML = '';
-    playerOne.innerHTML += `<p>${player.winTotal}</p>`;
+    playerOneWins.innerHTML = '';
+    playerOneWins.innerHTML += `<p>${player.winTotal}</p>`;
   } else if (player.token === 'cheese') {
-    playerTwo.innerHTML = '';
-    playerTwo.innerHTML += `<p>${player.winTotal}</p>`;
+    playerTwoWins.innerHTML = '';
+    playerTwoWins.innerHTML += `<p>${player.winTotal}</p>`;
   };
+};
+
+function displayWinMobile(player) {
+  if (player.token === 'shrimp') {
+    player1Column.classList.add('mobile-win')
+    player2Column.classList.remove('mobile-win')
+  } else if (player.token === 'cheese') {
+    player1Column.classList.remove('mobile-win')
+    player2Column.classList.add('mobile-win')
+  };
+  setTimeout(function() {
+    hideWinMobile()
+  }, 1500)
+};
+
+function hideWinMobile() {
+  player1Column.classList.remove('mobile-win');
+  player2Column.classList.remove('mobile-win')
 };
