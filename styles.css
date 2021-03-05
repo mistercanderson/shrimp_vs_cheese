@@ -16,6 +16,19 @@ body {
   transition: all 1s
 }
 
+.start-button {
+  border: none;
+  background: none;
+  font-family: 'DotGothic16', sans-serif;
+  color: white;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.start-button:focus {
+  outline: none
+}
+
 .players {
   display: flex;
   flex-direction: column;
