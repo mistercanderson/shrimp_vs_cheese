@@ -47,7 +47,7 @@ function gameWon() {
     setTimeout(function() {
       displayWinTotal(player)
       clearBoard()
-    }, 2500);
+    }, 2400);
   };
 };
 
@@ -59,7 +59,7 @@ function gameDraw() {
     disableBoard();
     setTimeout(function() {
       clearBoard()
-    }, 2500);
+    }, 2400);
   }
 }
 
