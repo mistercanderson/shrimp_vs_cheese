@@ -31,29 +31,34 @@ body {
   display: none;
 }
 
-.players>img {
+.player-wrapper {
+  background: red;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: sticky;
+  top: 10%;
+}
+
+.player-wrapper>img {
   margin-top: 10%;
   width: 5em;
 }
 
-.players>h3 {
+.player-wrapper>h3 {
   text-align: center;
   padding: 1em 0;
 }
 
 .win-counter {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.win-counter>div {
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.win-counter>div>p {
+.win-counter>p {
   font-size: 4em;
   color: white;
 }
