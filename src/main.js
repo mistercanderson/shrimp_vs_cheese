@@ -294,7 +294,7 @@ function saveButton() {
 function save() {
   if (event.target.id === 'saveButton') {
     for (var i = 0; i < game.players.length; i++) {
-      localStorage.setItem(`${game.players[i].id}`, JSON.stringify(game.players[i]))
+      localStorage.setItem(`${game.players[i].token}`, JSON.stringify(game.players[i]))
     };
     event.target.innerText = 'SAVED';
     event.target.style.color = 'coral'
