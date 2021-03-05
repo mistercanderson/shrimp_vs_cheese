@@ -271,6 +271,7 @@ function reset() {
   if (event.target.id === 'resetButton') {
     for (var i = 0; i < game.players.length; i++) {
       game.players[i].winTotal = 0;
+      game.players[i].wins = [];
       displayWinTotal(game.players[i])
     };
     toggleWiggleAnimation(player);
@@ -285,7 +286,9 @@ function saveButton() {
 
 function save() {
   if (event.target.id === 'saveButton') {
-    // write Player data save to local storage here
+  for (var i = 0; i < game.players.length; i++) {
+    localStorage.setItem(`${game.players[i].id}`, JSON.stringify(game.players[i]))
+  };
     event.target.innerText = 'SAVED';
     event.target.style.color = 'coral'
     event.target.disabled = true;
