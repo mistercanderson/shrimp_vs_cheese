@@ -268,7 +268,7 @@ function wobbleText() {
 
 function playAgainButton() {
   var topSquare = document.getElementById('topCenter');
-  topSquare.innerHTML += `<button id="againButton">AGAIN?</button>`;
+  topSquare.innerHTML += `<button class="again" id="againButton">AGAIN?</button>`;
 };
 
 function playAgain() {
@@ -280,7 +280,7 @@ function playAgain() {
 
 function resetButton() {
   var bottomLeftSquare = document.getElementById('bottomLeft');
-  bottomLeftSquare.innerHTML += `<button id="resetButton">RESET</button>`
+  bottomLeftSquare.innerHTML += `<button class="reset" id="resetButton">RESET</button>`
 }
 
 function reset() {
