@@ -34,6 +34,8 @@ function startButton() {
   };
 };
 
+
+
 function hideButtons() {
   var buttons = document.querySelectorAll('button');
   for (var i = 0; i < buttons.length; i++) {
@@ -47,6 +49,7 @@ function hideButtons() {
 
 function playGame() {
   startButton();
+  playAgain();
   if (event.target.classList.contains('squares') && game) {
     player = checkCurrentPlayer();
     var space = checkCurrentSpace();
@@ -70,9 +73,12 @@ function gameWon() {
     disableBoard();
     player.saveWinsToStorage(game);
     setTimeout(function() {
-      displayWinTotal(player)
-      clearBoard()
+      displayWinTotal(player);
+      clearBoard();
     }, 2400);
+    setTimeout(function() {
+      playAgainButton();
+    }, 2500);
   };
 };
 
@@ -83,10 +89,13 @@ function gameDraw() {
     toggleWiggleAnimation(player);
     disableBoard();
     setTimeout(function() {
-      clearBoard()
+      clearBoard();
     }, 2400);
-  }
-}
+    setTimeout(function() {
+      playAgainButton();
+    }, 2500);
+  };
+};
 
 function move(player, space) {
   if (!game.board[space]) {
@@ -182,7 +191,7 @@ function clearBoard() {
     game.resetBoard();
     changeGameHeader(player)
     renderBoard();
-  }
+  };
 };
 
 function disableBoard() {
@@ -228,5 +237,17 @@ function wobbleText() {
     gameDisplay.classList.add('wobble')
   } else {
     gameDisplay.classList.remove('wobble')
+  };
+};
+
+function playAgainButton() {
+  var midSquare = document.getElementById('midCenter');
+  midSquare.innerHTML += `<button id="againButton">AGAIN?</button>`;
+};
+
+function playAgain() {
+  if (event.target.id === 'againButton') {
+    toggleWiggleAnimation(player);
+    hideButtons();
   };
 };
