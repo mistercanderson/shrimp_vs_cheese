@@ -1,6 +1,8 @@
 // Data Model
-var game = createGame('shrimp', 'cheese');
-var player = checkCurrentPlayer();
+var game;
+var player;
+// var game = createGame('shrimp', 'cheese');
+// var player = checkCurrentPlayer();
 
 // DOM Elements
 var gameSection = document.getElementById('game')
@@ -22,11 +24,23 @@ function createGame(player1, player2) {
   return ticTacToe
 };
 
+function startButton() {
+  if (event.target.id === 'startButton') {
+    game = createGame('shrimp', 'cheese');
+    player = checkCurrentPlayer();
+    document.getElementById('shrimp').classList.add('wiggle')
+    return game, player;
+  };
+};
+
+
 function playGame() {
+  startButton();
   if (event.target.classList.contains('squares')) {
     player = checkCurrentPlayer();
     var space = checkCurrentSpace();
     move(player, space);
+    toggleWiggleAnimation(player);
     changeGameHeader(player);
     if (game.isWon || game.isDraw) {
       gameWon();
@@ -41,6 +55,7 @@ function gameWon() {
   if (game.isWon) {
     renderBoard();
     gameEndAnimation();
+    toggleWiggleAnimation(player);
     disableBoard();
     player.saveWinsToStorage(game);
     setTimeout(function() {
@@ -54,6 +69,7 @@ function gameDraw() {
   if (game.isDraw) {
     renderBoard();
     gameEndAnimation();
+    toggleWiggleAnimation(player);
     disableBoard();
     setTimeout(function() {
       clearBoard()
@@ -64,7 +80,6 @@ function gameDraw() {
 function move(player, space) {
   if (!game.board[space]) {
     game.makeMove(player, space);
-    toggleWiggleAnimation(player);
   };
 };
 

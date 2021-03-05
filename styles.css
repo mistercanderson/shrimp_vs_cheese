@@ -22,11 +22,17 @@ body {
   font-family: 'DotGothic16', sans-serif;
   color: white;
   cursor: pointer;
+  padding: 10%;
   z-index: 2;
+  transition: transform .1s ease-in;
 }
 
 .start-button:focus {
   outline: none
+}
+
+.start-button:hover {
+  transform: scale(2.5);
 }
 
 .players {
@@ -101,6 +107,7 @@ body {
 .game-board {
   width: 80%;
   height: 80%;
+  min-height: 25em;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
