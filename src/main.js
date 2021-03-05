@@ -46,8 +46,6 @@ function clear() {
   };
 };
 
-
-
 function hideButtons() {
   var buttons = document.querySelectorAll('button');
   for (var i = 0; i < buttons.length; i++) {
@@ -73,10 +71,19 @@ function buttonFunctions() {
   save();
 };
 
+function checkEmptySpace() {
+  for (var i = 0; i < spaces.length; i++) {
+    if (!spaces[i].innerHTML) {
+      hideButtons()
+    };
+  };
+};
+
 function playGame() {
   buttonFunctions();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
+    checkEmptySpace();
     var space = checkCurrentSpace();
     move(player, space);
     toggleWiggleAnimation();
