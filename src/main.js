@@ -46,8 +46,6 @@ function clear() {
   };
 };
 
-
-
 function hideButtons() {
   var buttons = document.querySelectorAll('button');
   for (var i = 0; i < buttons.length; i++) {
@@ -70,13 +68,22 @@ function buttonFunctions() {
   load();
   playAgain();
   reset();
-  save();
+  saveGame();
+};
+
+function checkEmptySpace() {
+  for (var i = 0; i < spaces.length; i++) {
+    if (!spaces[i].innerHTML) {
+      hideButtons()
+    };
+  };
 };
 
 function playGame() {
   buttonFunctions();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
+    checkEmptySpace();
     var space = checkCurrentSpace();
     move(player, space);
     toggleWiggleAnimation();
@@ -309,13 +316,27 @@ function saveButton() {
 };
 
 function save() {
+  for (var i = 0; i < game.players.length; i++) {
+    localStorage.setItem(`${game.players[i].token}`, JSON.stringify(game.players[i]))
+  };
+  event.target.innerText = 'SAVED';
+  event.target.style.color = 'coral'
+  event.target.disabled = true;
+};
+
+function confirmSave() {
+  if (window.confirm('This will overwrite previously stored game data. Are you sure?')) {
+    save()
+  };
+};
+
+function saveGame() {
   if (event.target.id === 'saveButton') {
-    for (var i = 0; i < game.players.length; i++) {
-      localStorage.setItem(`${game.players[i].token}`, JSON.stringify(game.players[i]))
+    if (localStorage.length) {
+      confirmSave();
+    } else {
+      save()
     };
-    event.target.innerText = 'SAVED';
-    event.target.style.color = 'coral'
-    event.target.disabled = true;
   };
 };
 
