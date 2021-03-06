@@ -339,6 +339,14 @@ button:hover {
     flex-grow: 0;
   }
 
+  .game-display-wrapper {
+    padding-top: 3.5em
+  }
+
+  .game-board {
+    padding-top: 3em;
+  }
+
   .dot {
     display: block;
     color: blue;
