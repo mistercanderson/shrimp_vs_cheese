@@ -358,4 +358,8 @@ button:hover {
     display: block;
     z-index: 3;
   }
+
+  button:hover {
+    transform: none;
+  }
 }
