@@ -118,6 +118,24 @@ button:hover {
   text-align: center;
 }
 
+.dot {
+  display: none;
+}
+
+.player-one-dot {
+  display: block;
+  position: absolute;
+  padding-right: 18.5em;
+  padding-top: 1em;
+}
+
+.player-two-dot {
+  display: block;
+  position: absolute;
+  padding-left: 18.5em;
+  padding-top: 1em;
+}
+
 .game-board {
   width: 80%;
   height: 80%;
