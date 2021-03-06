@@ -172,41 +172,28 @@ function changeGameHeader(player) {
 };
 
 function indicateCurrentPlayer() {
-  toggleWiggleAnimation();
-  toggleDotPosition()
-};
-
-function toggleWiggleAnimation() {
   var activePlayer = checkCurrentPlayer();
   var shrimp = document.getElementById('shrimp');
   var cheese = document.getElementById('cheese');
+  var dotOne = document.getElementById('playerOneDot');
+  var dotTwo = document.getElementById('playerTwoDot');
   if (activePlayer.token === 'shrimp' && !game.isWon && !game.isDraw) {
     shrimp.classList.add('wiggle');
     cheese.classList.remove('wiggle')
+    dotOne.classList.add('player-one-dot');
+    dotTwo.classList.remove('player-two-dot');
   } else if (activePlayer.token === 'cheese' && !game.isWon && !game.isDraw) {
     shrimp.classList.remove('wiggle');
     cheese.classList.add('wiggle')
+    dotOne.classList.remove('player-one-dot');
+    dotTwo.classList.add('player-two-dot');
   } else {
     shrimp.classList.remove('wiggle');
     cheese.classList.remove('wiggle')
+    dotOne.classList.remove('player-one-dot');
+    dotTwo.classList.remove('player-two-dot');
   };
 };
-
-function toggleDotPosition() {
-  var activePlayer = checkCurrentPlayer();
-  var dot = document.getElementById('playerDot');
-  if (activePlayer.token === 'shrimp' && !game.isWon && !game.isDraw) {
-    dot.classList.add('player-one-dot');
-    dot.classList.remove('player-two-dot');
-  } else if (activePlayer.token === 'cheese' && !game.isWon && !game.isDraw) {
-    dot.classList.remove('player-one-dot');
-    dot.classList.add('player-two-dot');
-  } else {
-    dot.classList.remove('player-one-dot', 'player-two-dot');
-  };
-};
-
-
 
 function gameEndAnimation() {
   indicateCurrentPlayer()
@@ -396,9 +383,11 @@ function displayWinTotalOnLoad() {
     };
   };
   if (shrimp.winTotal) {
-    player1Column.children[1].innerHTML += `<p>${shrimp.winTotal}</p>`
+    var playerOneCounter = document.getElementById('playerOneWins');
+    playerOneCounter.innerHTML += `<p>${shrimp.winTotal}</p>`
   };
   if (cheese.winTotal) {
-    player2Column.children[1].innerHTML += `<p>${cheese.winTotal}</p>`
+    var playerTwoCounter = document.getElementById('playerTwoWins');
+    playerTwoCounter.innerHTML += `<p>${cheese.winTotal}</p>`
   };
 };
