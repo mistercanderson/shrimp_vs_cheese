@@ -193,16 +193,18 @@ function toggleWiggleAnimation() {
 };
 
 function toggleDotPosition() {
+  var dotOne = document.getElementById('playerOneDot');
+  var dotTwo = document.getElementById('playerTwoDot');
   var activePlayer = checkCurrentPlayer();
-  var dot = document.getElementById('playerDot');
   if (activePlayer.token === 'shrimp' && !game.isWon && !game.isDraw) {
-    dot.classList.add('player-one-dot');
-    dot.classList.remove('player-two-dot');
+    dotOne.classList.add('player-one-dot');
+    dotTwo.classList.remove('player-two-dot');
   } else if (activePlayer.token === 'cheese' && !game.isWon && !game.isDraw) {
-    dot.classList.remove('player-one-dot');
-    dot.classList.add('player-two-dot');
+    dotOne.classList.remove('player-one-dot');
+    dotTwo.classList.add('player-two-dot');
   } else {
-    dot.classList.remove('player-one-dot', 'player-two-dot');
+    dotOne.classList.remove('player-one-dot');
+    dotTwo.classList.remove('player-two-dot');
   };
 };
 
