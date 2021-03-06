@@ -120,20 +120,21 @@ button:hover {
 
 .dot {
   display: none;
+  animation: wobble 2s infinite ease-in-out;
 }
 
 .player-one-dot {
   display: block;
   position: absolute;
   padding-right: 18.5em;
-  padding-top: 1em;
+  padding-top: .8em;
 }
 
 .player-two-dot {
   display: block;
   position: absolute;
   padding-left: 18.5em;
-  padding-top: 1em;
+  padding-top: .8em;
 }
 
 .game-board {
