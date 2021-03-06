@@ -27,7 +27,7 @@ function startButton() {
   if (event.target.id === 'startButton') {
     game = createGame('shrimp', 'cheese');
     player = checkCurrentPlayer();
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     hideButtons();
   };
 };
@@ -86,7 +86,7 @@ function playGame() {
     checkEmptySpace();
     var space = checkCurrentSpace();
     move(player, space);
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     changeGameHeader(player);
     if (game.isWon || game.isDraw) {
       gameWon();
@@ -101,7 +101,7 @@ function gameWon() {
   if (game.isWon) {
     renderBoard();
     gameEndAnimation();
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     disableBoard();
     player.saveWinsToStorage(game);
     setTimeout(function() {
@@ -120,7 +120,7 @@ function gameDraw() {
   if (game.isDraw) {
     renderBoard();
     gameEndAnimation();
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     disableBoard();
     setTimeout(function() {
       clearBoard();
@@ -171,6 +171,11 @@ function changeGameHeader(player) {
   wobbleText();
 };
 
+function indicateCurrentPlayer() {
+  toggleWiggleAnimation();
+  toggleDotPosition()
+};
+
 function toggleWiggleAnimation() {
   var activePlayer = checkCurrentPlayer();
   var shrimp = document.getElementById('shrimp');
@@ -187,8 +192,24 @@ function toggleWiggleAnimation() {
   };
 };
 
+function toggleDotPosition() {
+  var activePlayer = checkCurrentPlayer();
+  var dot = document.getElementById('playerDot');
+  if (activePlayer.token === 'shrimp' && !game.isWon && !game.isDraw) {
+    dot.classList.add('player-one-dot');
+    dot.classList.remove('player-two-dot');
+  } else if (activePlayer.token === 'cheese' && !game.isWon && !game.isDraw) {
+    dot.classList.remove('player-one-dot');
+    dot.classList.add('player-two-dot');
+  } else {
+    dot.classList.remove('player-one-dot', 'player-two-dot');
+  };
+};
+
+
+
 function gameEndAnimation() {
-  toggleWiggleAnimation()
+  indicateCurrentPlayer()
   if (game.isWon) {
     for (var i = 0; i < spaces.length; i++) {
       if (spaces[i].children[0] &&
@@ -216,7 +237,7 @@ function renderBoard() {
 };
 
 function clearBoard() {
-  toggleWiggleAnimation();
+  indicateCurrentPlayer();
   enableBoard();
   if (game.isWon) {
     displayWinnerMobile(player);
@@ -288,7 +309,7 @@ function playAgainButton() {
 
 function playAgain() {
   if (event.target.id === 'againButton') {
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     hideButtons();
   };
 };
@@ -305,7 +326,7 @@ function reset() {
       game.players[i].wins = [];
       displayWinTotal(game.players[i])
     };
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     hideButtons();
   };
 };
@@ -357,7 +378,7 @@ function load() {
       game.players[i].token = playerFiles[i].token;
     };
     displayWinTotalOnLoad();
-    toggleWiggleAnimation();
+    indicateCurrentPlayer();
     hideButtons();
   } else if (event.target.id === 'clearButton') {
     game = createGame('shrimp', 'cheese');
