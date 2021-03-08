@@ -357,11 +357,7 @@ function load() {
     };
     game = createGame('shrimp', 'cheese');
     for (var i = 0; i < game.players.length; i++) {
-      game.players[i].wins = playerProfiles[i].wins;
-      game.players[i].winTotal = playerProfiles[i].winTotal;
-      game.players[i].id = playerProfiles[i].id;
-      game.players[i].isTurn = playerProfiles[i].isTurn;
-      game.players[i].token = playerProfiles[i].token;
+      game.players[i].retrieveDataFromStorage(playerProfiles[i]);
     };
     displayWinTotalOnLoad();
     indicateCurrentPlayer();

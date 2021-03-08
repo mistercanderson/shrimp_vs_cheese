@@ -14,8 +14,12 @@ class Player {
     this.winTotal++
   };
 
-  retreiveWinsFromStorage(wins) {
-    this.wins.push(wins);
+  retrieveDataFromStorage(playerProfile) {
+    this.id = playerProfile.id;
+    this.token = playerProfile.token;
+    this.isTurn = playerProfile.isTurn;
+    this.wins = playerProfile.wins;
+    this.winTotal = playerProfile.winTotal
   };
 
   exchangeTurns() {
