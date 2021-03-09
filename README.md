@@ -45,3 +45,6 @@ Shrimp vs. Cheese is a fun twist on the classic game of tic-tac-toe. The first p
 
 ##### Game save/load:
 ![](https://media.giphy.com/media/ph1rHgkiOs7K0M63nV/giphy.gif)
+
+##### Mobile play:
+![](https://media.giphy.com/media/V4mtlrxnsia52IdXOa/giphy.gif)
