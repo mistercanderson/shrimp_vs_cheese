@@ -1,10 +1,10 @@
 class Player {
 
-  constructor(token, isTurn, wins, id) {
-    this.id = id || Math.floor(Date.now() * Math.random());
+  constructor(token, isTurn) {
+    this.id = Math.floor(Date.now() * Math.random());
     this.token = token;
     this.isTurn = isTurn || false;
-    this.wins = wins || [];
+    this.wins = [];
     this.winTotal = 0;
   };
 
@@ -14,8 +14,12 @@ class Player {
     this.winTotal++
   };
 
-  retreiveWinsFromStorage(wins) {
-    this.wins.push(wins);
+  retrieveDataFromStorage(playerProfile) {
+    this.id = playerProfile.id;
+    this.token = playerProfile.token;
+    this.isTurn = playerProfile.isTurn;
+    this.wins = playerProfile.wins;
+    this.winTotal = playerProfile.winTotal
   };
 
   exchangeTurns() {

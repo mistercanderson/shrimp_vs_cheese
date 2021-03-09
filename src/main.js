@@ -200,14 +200,13 @@ function gameEndAnimation() {
   if (game.isWon) {
     for (var i = 0; i < spaces.length; i++) {
       if (spaces[i].children[0] &&
-        spaces[i].children[0].className === player.token)
+        spaces[i].children[0].className === player.token) {
         spaces[i].children[0].classList.add('winner')
+      };
     };
   } else if (game.isDraw) {
     for (var i = 0; i < spaces.length; i++) {
-      if (spaces[i].children[0]) {
-        spaces[i].children[0].classList.add('draw')
-      };
+      spaces[i].children[0].classList.add('draw')
     };
   };
 };
@@ -351,18 +350,14 @@ function saveGame() {
 function load() {
   if (event.target.id === 'loadButton') {
     var keys = Object.keys(localStorage);
-    var playerFiles = [];
+    var playerProfiles = [];
     for (var i = 0; i < keys.length; i++) {
       var playerData = JSON.parse(localStorage.getItem(keys[i]));
-      playerFiles.push(playerData)
+      playerProfiles.push(playerData)
     };
     game = createGame('shrimp', 'cheese');
     for (var i = 0; i < game.players.length; i++) {
-      game.players[i].wins = playerFiles[i].wins;
-      game.players[i].winTotal = playerFiles[i].winTotal;
-      game.players[i].id = playerFiles[i].id;
-      game.players[i].isTurn = playerFiles[i].isTurn;
-      game.players[i].token = playerFiles[i].token;
+      game.players[i].retrieveDataFromStorage(playerProfiles[i]);
     };
     displayWinTotalOnLoad();
     indicateCurrentPlayer();
