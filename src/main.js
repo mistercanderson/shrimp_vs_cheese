@@ -23,22 +23,22 @@ function createGame(player1, player2) {
 }
 
 function startButton() {
-    game = createGame('shrimp', 'cheese');
-    player = checkCurrentPlayer();
-    indicateCurrentPlayer();
-    hideButtons();
+  game = createGame('shrimp', 'cheese');
+  player = checkCurrentPlayer();
+  indicateCurrentPlayer();
+  hideButtons();
 }
 
 function clear() {
-    if (window.confirm('Are you sure you want to clear the saved game?')) {
-      if (window.confirm('Like, seriously?')) {
-        window.alert('THE WATERS HAVE BEEN CLEANSED');
-        game = createGame('shrimp', 'cheese');
-        localStorage.clear();
-        checkStorage();
-        event.target.style.color = 'coral';
-      }
+  if (window.confirm('Are you sure you want to clear the saved game?')) {
+    if (window.confirm('Like, seriously?')) {
+      window.alert('THE WATERS HAVE BEEN CLEANSED');
+      game = createGame('shrimp', 'cheese');
+      localStorage.clear();
+      checkStorage();
+      event.target.style.color = 'coral';
     }
+  }
 }
 
 function hideButtons() {
@@ -113,11 +113,11 @@ function gameWon() {
     indicateCurrentPlayer();
     disableBoard();
     player.saveWinsToStorage(game);
-    setTimeout(function() {
+    setTimeout(function () {
       displayWinTotal(player);
       clearBoard();
     }, 2400);
-    setTimeout(function() {
+    setTimeout(function () {
       playAgainButton();
       resetButton();
       saveButton();
@@ -131,10 +131,10 @@ function gameDraw() {
     gameEndAnimation();
     indicateCurrentPlayer();
     disableBoard();
-    setTimeout(function() {
+    setTimeout(function () {
       clearBoard();
     }, 2400);
-    setTimeout(function() {
+    setTimeout(function () {
       playAgainButton();
       resetButton();
       saveButton();
@@ -214,7 +214,7 @@ function gameEndAnimation() {
       }
     }
   } else if (game.isDraw) {
-    for (i = 0; i < spaces.length; i++) {
+    for (let i = 0; i < spaces.length; i++) {
       spaces[i].children[0].classList.add('draw');
     }
   }
@@ -224,9 +224,9 @@ function renderBoard() {
   for (let i = 0; i < game.board.length; i++) {
     spaces[i].innerHTML = '';
     if (game.board[i] === 'shrimp') {
-      spaces[i].innerHTML += '<img class="shrimp" src="./assets/shrimp.svg" alt="shrimp">';
+      spaces[i].innerHTML += `<img class="shrimp" src="./assets/shrimp.svg" alt="shrimp">`;
     } else if (game.board[i] === 'cheese') {
-      spaces[i].innerHTML += '<img class="cheese" src="./assets/cheese.svg" alt="cheese">';
+      spaces[i].innerHTML += `<img class="cheese" src="./assets/cheese.svg" alt="cheese">`;
     }
   }
 }
@@ -279,7 +279,7 @@ function displayWinnerMobile(player) {
     player1Column.classList.remove('mobile-win');
     player2Column.classList.add('mobile-win');
   }
-  setTimeout(function() {
+  setTimeout(function () {
     hideWinMobile();
   }, 1500);
 }
@@ -299,27 +299,27 @@ function wobbleText() {
 
 function playAgainButton() {
   const topSquare = document.getElementById('topCenter');
-  topSquare.innerHTML += '<button class="again" id="againButton">AGAIN?</button>';
+  topSquare.innerHTML += `<button class="again" id="againButton">AGAIN?</button>`;
 }
 
 function playAgain() {
-    indicateCurrentPlayer();
-    hideButtons();
+  indicateCurrentPlayer();
+  hideButtons();
 }
 
 function resetButton() {
   const bottomLeftSquare = document.getElementById('bottomLeft');
-  bottomLeftSquare.innerHTML += '<button class="reset" id="resetButton">RESET</button>';
+  bottomLeftSquare.innerHTML += `<button class="reset" id="resetButton">RESET</button>`;
 }
 
 function reset() {
-    for (let i = 0; i < game.players.length; i++) {
-      game.players[i].winTotal = 0;
-      game.players[i].wins = [];
-      displayWinTotal(game.players[i]);
-    }
-    indicateCurrentPlayer();
-    hideButtons();
+  for (let i = 0; i < game.players.length; i++) {
+    game.players[i].winTotal = 0;
+    game.players[i].wins = [];
+    displayWinTotal(game.players[i]);
+  }
+  indicateCurrentPlayer();
+  hideButtons();
 }
 
 function saveButton() {
@@ -337,33 +337,33 @@ function save() {
 }
 
 function confirmSave() {
-  if (window.confirm('This will overwrite previously stored game data. Are you sure?')) {
+  if (window.confirm(`This will overwrite previously stored game data. Are you sure?`)) {
     save();
   }
 }
 
 function saveGame() {
-    if (localStorage.length) {
-      confirmSave();
-    } else {
-      save();
-    }
+  if (localStorage.length) {
+    confirmSave();
+  } else {
+    save();
+  }
 }
 
 function load() {
-    const keys = Object.keys(localStorage);
-    const playerProfiles = [];
-    for (let i = 0; i < keys.length; i++) {
-      const playerData = JSON.parse(localStorage.getItem(keys[i]));
-      playerProfiles.push(playerData);
-    }
-    game = createGame('shrimp', 'cheese');
-    for (i = 0; i < game.players.length; i++) {
-      game.players[i].retrieveDataFromStorage(playerProfiles[i]);
-    }
-    displayWinTotalOnLoad();
-    indicateCurrentPlayer();
-    hideButtons();
+  const keys = Object.keys(localStorage);
+  const playerProfiles = [];
+  for (let i = 0; i < keys.length; i++) {
+    const playerData = JSON.parse(localStorage.getItem(keys[i]));
+    playerProfiles.push(playerData);
+  }
+  game = createGame('shrimp', 'cheese');
+  for (let i = 0; i < game.players.length; i++) {
+    game.players[i].retrieveDataFromStorage(playerProfiles[i]);
+  }
+  displayWinTotalOnLoad();
+  indicateCurrentPlayer();
+  hideButtons();
 }
 
 function displayWinTotalOnLoad() {
