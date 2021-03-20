@@ -160,7 +160,7 @@ function checkWinner() {
   return game.checkForWin(player);
 }
 
-function changeGameHeader(player) {
+function changeGameHeader() {
   if (checkWinner()) {
     gameDisplay.innerText = checkWinner().toUpperCase();
     wobbleText();
@@ -204,7 +204,7 @@ function gameEndAnimation() {
       }
     }
   } else if (game.isDraw) {
-    for (var i = 0; i < spaces.length; i++) {
+    for (i = 0; i < spaces.length; i++) {
       spaces[i].children[0].classList.add('draw');
     }
   }
@@ -355,7 +355,7 @@ function load(event) {
       playerProfiles.push(playerData);
     }
     game = createGame('shrimp', 'cheese');
-    for (var i = 0; i < game.players.length; i++) {
+    for (i = 0; i < game.players.length; i++) {
       game.players[i].retrieveDataFromStorage(playerProfiles[i]);
     }
     displayWinTotalOnLoad();
