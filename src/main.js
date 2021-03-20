@@ -1,13 +1,13 @@
 // Data Model
-var game;
-var player;
+let game;
+let player;
 
 // DOM Elements
-var gameDisplay = document.getElementById('gameDisplay');
-var gameBoard = document.getElementById('gameBoard');
-var spaces = gameBoard.children;
-var player1Column = document.getElementById('playerOne');
-var player2Column = document.getElementById('playerTwo');
+const gameDisplay = document.getElementById('gameDisplay');
+const gameBoard = document.getElementById('gameBoard');
+const spaces = gameBoard.children;
+const player1Column = document.getElementById('playerOne');
+const player2Column = document.getElementById('playerTwo');
 
 // Event Listeners
 window.addEventListener('load', checkStorage);
@@ -15,14 +15,14 @@ gameBoard.addEventListener('click', playGame);
 
 // Functions
 function createGame(player1, player2) {
-  var ticTacToe = new Game(3, 3);
-  var p1 = new Player(player1, true);
-  var p2 = new Player(player2);
+  const ticTacToe = new Game(3, 3);
+  const p1 = new Player(player1, true);
+  const p2 = new Player(player2);
   ticTacToe.addPlayers(p1, p2);
   return ticTacToe;
 }
 
-function startButton(event) {
+function startButton() {
   if (event.target.id === 'startButton') {
     game = createGame('shrimp', 'cheese');
     player = checkCurrentPlayer();
@@ -31,7 +31,7 @@ function startButton(event) {
   }
 }
 
-function clear(event) {
+function clear() {
   if (event.target.id === 'clearButton') {
     if (window.confirm('Are you sure you want to clear the saved game?')) {
       if (window.confirm('Like, seriously?')) {
@@ -46,8 +46,8 @@ function clear(event) {
 }
 
 function hideButtons() {
-  var buttons = document.querySelectorAll('button');
-  for (var i = 0; i < buttons.length; i++) {
+  const buttons = document.querySelectorAll('button');
+  for (let i = 0; i < buttons.length; i++) {
     buttons[i].style.display = 'none';
   }
   player1Column.style.opacity = 1;
@@ -71,19 +71,19 @@ function buttonFunctions() {
 }
 
 function checkEmptySpace() {
-  for (var i = 0; i < spaces.length; i++) {
+  for (let i = 0; i < spaces.length; i++) {
     if (!spaces[i].innerHTML) {
       hideButtons();
     }
   }
 }
 
-function playGame(event) {
+function playGame() {
   buttonFunctions();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
     checkEmptySpace();
-    var space = checkCurrentSpace();
+    const space = checkCurrentSpace();
     move(player, space);
     indicateCurrentPlayer();
     changeGameHeader(player);
@@ -139,16 +139,16 @@ function move(player, space) {
 }
 
 function checkCurrentPlayer() {
-  for (var i = 0; i < game.players.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (game.players[i].isTurn) {
       return game.players[i];
     }
   }
 }
 
-function checkCurrentSpace(event) {
-  var currentSpace;
-  for (var i = 0; i < spaces.length; i++) {
+function checkCurrentSpace() {
+  let currentSpace;
+  for (let i = 0; i < spaces.length; i++) {
     if (event.target === spaces[i]) {
       currentSpace = i;
     }
@@ -171,11 +171,11 @@ function changeGameHeader() {
 }
 
 function indicateCurrentPlayer() {
-  var activePlayer = checkCurrentPlayer();
-  var shrimp = document.getElementById('shrimp');
-  var cheese = document.getElementById('cheese');
-  var dotOne = document.getElementById('playerOneDot');
-  var dotTwo = document.getElementById('playerTwoDot');
+  const activePlayer = checkCurrentPlayer();
+  const shrimp = document.getElementById('shrimp');
+  const cheese = document.getElementById('cheese');
+  const dotOne = document.getElementById('playerOneDot');
+  const dotTwo = document.getElementById('playerTwoDot');
   if (activePlayer.token === 'shrimp' && !game.isWon && !game.isDraw) {
     shrimp.classList.add('wiggle');
     cheese.classList.remove('wiggle');
@@ -197,7 +197,7 @@ function indicateCurrentPlayer() {
 function gameEndAnimation() {
   indicateCurrentPlayer();
   if (game.isWon) {
-    for (var i = 0; i < spaces.length; i++) {
+    for (let i = 0; i < spaces.length; i++) {
       if (spaces[i].children[0] &&
         spaces[i].children[0].className === player.token) {
         spaces[i].children[0].classList.add('winner');
@@ -211,7 +211,7 @@ function gameEndAnimation() {
 }
 
 function renderBoard() {
-  for (var i = 0; i < game.board.length; i++) {
+  for (let i = 0; i < game.board.length; i++) {
     spaces[i].innerHTML = '';
     if (game.board[i] === 'shrimp') {
       spaces[i].innerHTML += '<img class="shrimp" src="./assets/shrimp.svg" alt="shrimp">';
@@ -245,8 +245,8 @@ function enableBoard() {
 }
 
 function displayWinTotal(player) {
-  var playerOneWins = document.getElementById('playerOneWins');
-  var playerTwoWins = document.getElementById('playerTwoWins');
+  const playerOneWins = document.getElementById('playerOneWins');
+  const playerTwoWins = document.getElementById('playerTwoWins');
   if (player.winTotal) {
     if (player.token === 'shrimp') {
       playerOneWins.innerHTML = '';
@@ -288,11 +288,11 @@ function wobbleText() {
 }
 
 function playAgainButton() {
-  var topSquare = document.getElementById('topCenter');
+  const topSquare = document.getElementById('topCenter');
   topSquare.innerHTML += '<button class="again" id="againButton">AGAIN?</button>';
 }
 
-function playAgain(event) {
+function playAgain() {
   if (event.target.id === 'againButton') {
     indicateCurrentPlayer();
     hideButtons();
@@ -300,13 +300,13 @@ function playAgain(event) {
 }
 
 function resetButton() {
-  var bottomLeftSquare = document.getElementById('bottomLeft');
+  const bottomLeftSquare = document.getElementById('bottomLeft');
   bottomLeftSquare.innerHTML += '<button class="reset" id="resetButton">RESET</button>';
 }
 
-function reset(event) {
+function reset() {
   if (event.target.id === 'resetButton') {
-    for (var i = 0; i < game.players.length; i++) {
+    for (let i = 0; i < game.players.length; i++) {
       game.players[i].winTotal = 0;
       game.players[i].wins = [];
       displayWinTotal(game.players[i]);
@@ -317,12 +317,12 @@ function reset(event) {
 }
 
 function saveButton() {
-  var bottomRightSquare = document.getElementById('bottomRight');
+  const bottomRightSquare = document.getElementById('bottomRight');
   bottomRightSquare.innerHTML += '<button id="saveButton">SAVE</button>';
 }
 
-function save(event) {
-  for (var i = 0; i < game.players.length; i++) {
+function save() {
+  for (let i = 0; i < game.players.length; i++) {
     localStorage.setItem(`${game.players[i].token}`, JSON.stringify(game.players[i]));
   }
   event.target.innerText = 'SAVED';
@@ -336,7 +336,7 @@ function confirmSave() {
   }
 }
 
-function saveGame(event) {
+function saveGame() {
   if (event.target.id === 'saveButton') {
     if (localStorage.length) {
       confirmSave();
@@ -346,12 +346,12 @@ function saveGame(event) {
   }
 }
 
-function load(event) {
+function load() {
   if (event.target.id === 'loadButton') {
-    var keys = Object.keys(localStorage);
-    var playerProfiles = [];
-    for (var i = 0; i < keys.length; i++) {
-      var playerData = JSON.parse(localStorage.getItem(keys[i]));
+    const keys = Object.keys(localStorage);
+    const playerProfiles = [];
+    for (let i = 0; i < keys.length; i++) {
+      const playerData = JSON.parse(localStorage.getItem(keys[i]));
       playerProfiles.push(playerData);
     }
     game = createGame('shrimp', 'cheese');
@@ -367,9 +367,9 @@ function load(event) {
 }
 
 function displayWinTotalOnLoad() {
-  var shrimp;
-  var cheese;
-  for (var i = 0; i < game.players.length; i++) {
+  let shrimp;
+  let cheese;
+  for (let i = 0; i < game.players.length; i++) {
     if (game.players[i].token === 'shrimp') {
       shrimp = game.players[i];
     } else if (game.players[i].token === 'cheese') {
@@ -377,11 +377,11 @@ function displayWinTotalOnLoad() {
     }
   }
   if (shrimp.winTotal) {
-    var playerOneCounter = document.getElementById('playerOneWins');
+    const playerOneCounter = document.getElementById('playerOneWins');
     playerOneCounter.innerHTML += `<p>${shrimp.winTotal}</p>`;
   }
   if (cheese.winTotal) {
-    var playerTwoCounter = document.getElementById('playerTwoWins');
+    const playerTwoCounter = document.getElementById('playerTwoWins');
     playerTwoCounter.innerHTML += `<p>${cheese.winTotal}</p>`;
   }
 }
