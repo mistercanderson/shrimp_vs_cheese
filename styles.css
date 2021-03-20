@@ -356,6 +356,7 @@ button:hover {
     color: blue;
     padding: 0 10px 10px 10px;
     animation: wobble 2s infinite ease-in-out;
+    z-index: -1;
   }
 
   .player-one-dot {
@@ -368,6 +369,7 @@ button:hover {
 
   .mobile-win {
     display: block;
+    z-index: 3;
   }
 
   button:hover {
