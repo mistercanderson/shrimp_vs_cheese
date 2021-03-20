@@ -361,10 +361,12 @@ button:hover {
 
   .player-one-dot {
     color: white;
+    z-index: 1;
   }
 
   .player-two-dot {
     color: white;
+    z-index: 1;
   }
 
   .mobile-win {
