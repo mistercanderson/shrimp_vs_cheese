@@ -33,7 +33,7 @@ function clear() {
     if (window.confirm('Are you sure you want to clear the saved game?')) {
       if (window.confirm('Like, seriously?')) {
         window.alert('THE WATERS HAVE BEEN CLEANSED');
-        load();
+        game = createGame('shrimp', 'cheese');
         localStorage.clear();
         checkStorage();
         event.target.style.color = 'coral';
@@ -364,9 +364,6 @@ function load() {
     displayWinTotalOnLoad();
     indicateCurrentPlayer();
     hideButtons();
-   if (event.target.id === 'clearButton') {
-    game = createGame('shrimp', 'cheese');
-  }
 }
 
 function displayWinTotalOnLoad() {
