@@ -23,16 +23,13 @@ function createGame(player1, player2) {
 }
 
 function startButton() {
-  if (event.target.id === 'startButton') {
     game = createGame('shrimp', 'cheese');
     player = checkCurrentPlayer();
     indicateCurrentPlayer();
     hideButtons();
-  }
 }
 
 function clear() {
-  if (event.target.id === 'clearButton') {
     if (window.confirm('Are you sure you want to clear the saved game?')) {
       if (window.confirm('Like, seriously?')) {
         window.alert('THE WATERS HAVE BEEN CLEANSED');
@@ -42,7 +39,6 @@ function clear() {
         event.target.style.color = 'coral';
       }
     }
-  }
 }
 
 function hideButtons() {
@@ -62,12 +58,26 @@ function checkStorage() {
 }
 
 function buttonFunctions() {
-  startButton();
-  clear();
-  load();
-  playAgain();
-  reset();
-  saveGame();
+  switch (true) {
+    case event.target.id === 'startButton':
+      startButton();
+      break;
+    case event.target.id === 'clearButton':
+      clear();
+      break;
+    case event.target.id === 'loadButton':
+      load();
+      break;
+    case event.target.id === 'againButton':
+      playAgain();
+      break;
+    case event.target.id === 'resetButton':
+      reset();
+      break;
+    case event.target.id === 'saveButton':
+      saveGame();
+      break;
+  }
 }
 
 function checkEmptySpace() {
@@ -293,10 +303,8 @@ function playAgainButton() {
 }
 
 function playAgain() {
-  if (event.target.id === 'againButton') {
     indicateCurrentPlayer();
     hideButtons();
-  }
 }
 
 function resetButton() {
@@ -305,7 +313,6 @@ function resetButton() {
 }
 
 function reset() {
-  if (event.target.id === 'resetButton') {
     for (let i = 0; i < game.players.length; i++) {
       game.players[i].winTotal = 0;
       game.players[i].wins = [];
@@ -313,7 +320,6 @@ function reset() {
     }
     indicateCurrentPlayer();
     hideButtons();
-  }
 }
 
 function saveButton() {
@@ -337,17 +343,14 @@ function confirmSave() {
 }
 
 function saveGame() {
-  if (event.target.id === 'saveButton') {
     if (localStorage.length) {
       confirmSave();
     } else {
       save();
     }
-  }
 }
 
 function load() {
-  if (event.target.id === 'loadButton') {
     const keys = Object.keys(localStorage);
     const playerProfiles = [];
     for (let i = 0; i < keys.length; i++) {
@@ -361,7 +364,7 @@ function load() {
     displayWinTotalOnLoad();
     indicateCurrentPlayer();
     hideButtons();
-  } else if (event.target.id === 'clearButton') {
+   if (event.target.id === 'clearButton') {
     game = createGame('shrimp', 'cheese');
   }
 }
