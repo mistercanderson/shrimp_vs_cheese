@@ -3,7 +3,6 @@ var game;
 var player;
 
 // DOM Elements
-var gameSection = document.getElementById('game');
 var gameDisplay = document.getElementById('gameDisplay');
 var gameBoard = document.getElementById('gameBoard');
 var spaces = gameBoard.children;
@@ -23,7 +22,7 @@ function createGame(player1, player2) {
   return ticTacToe;
 }
 
-function startButton() {
+function startButton(event) {
   if (event.target.id === 'startButton') {
     game = createGame('shrimp', 'cheese');
     player = checkCurrentPlayer();
@@ -32,7 +31,7 @@ function startButton() {
   }
 }
 
-function clear() {
+function clear(event) {
   if (event.target.id === 'clearButton') {
     if (window.confirm('Are you sure you want to clear the saved game?')) {
       if (window.confirm('Like, seriously?')) {
@@ -79,7 +78,7 @@ function checkEmptySpace() {
   }
 }
 
-function playGame() {
+function playGame(event) {
   buttonFunctions();
   player = checkCurrentPlayer();
   if (event.target.classList.contains('squares') && game) {
@@ -147,7 +146,7 @@ function checkCurrentPlayer() {
   }
 }
 
-function checkCurrentSpace() {
+function checkCurrentSpace(event) {
   var currentSpace;
   for (var i = 0; i < spaces.length; i++) {
     if (event.target === spaces[i]) {
@@ -293,7 +292,7 @@ function playAgainButton() {
   topSquare.innerHTML += '<button class="again" id="againButton">AGAIN?</button>';
 }
 
-function playAgain() {
+function playAgain(event) {
   if (event.target.id === 'againButton') {
     indicateCurrentPlayer();
     hideButtons();
@@ -305,7 +304,7 @@ function resetButton() {
   bottomLeftSquare.innerHTML += '<button class="reset" id="resetButton">RESET</button>';
 }
 
-function reset() {
+function reset(event) {
   if (event.target.id === 'resetButton') {
     for (var i = 0; i < game.players.length; i++) {
       game.players[i].winTotal = 0;
@@ -322,7 +321,7 @@ function saveButton() {
   bottomRightSquare.innerHTML += '<button id="saveButton">SAVE</button>';
 }
 
-function save() {
+function save(event) {
   for (var i = 0; i < game.players.length; i++) {
     localStorage.setItem(`${game.players[i].token}`, JSON.stringify(game.players[i]));
   }
@@ -337,7 +336,7 @@ function confirmSave() {
   }
 }
 
-function saveGame() {
+function saveGame(event) {
   if (event.target.id === 'saveButton') {
     if (localStorage.length) {
       confirmSave();
@@ -347,7 +346,7 @@ function saveGame() {
   }
 }
 
-function load() {
+function load(event) {
   if (event.target.id === 'loadButton') {
     var keys = Object.keys(localStorage);
     var playerProfiles = [];
